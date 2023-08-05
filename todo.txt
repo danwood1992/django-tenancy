@@ -1,0 +1,11 @@
+postgres  DONE
+install django channels
+install Graphene DONE
+install redis 
+install celery 
+seperate url logic for non frontend 
+install frontend
+configure docker DONE
+build domain-tenant object and routing middleware DONE
+build basic routes and html temp DONE
+add first tests DONE

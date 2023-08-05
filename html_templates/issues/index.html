@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title>Issues</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <div class="text-center mb-4">
+        <h3 class="text-muted">{{management_domain}} | Issues Portal</h3>
+        <h1>Sorry, you're having issues!</h1>
+    </div>
+
+    <hr>
+
+    {% if not user.is_authenticated %}
+    <div class="alert alert-warning mt-4" role="alert">
+        {% if dev_mode == 1 %}
+        <p class="mb-0">Quickly <a href="http://{{management_domain}}:8000/issues" class="alert-link">log in</a> so we can clear this up!</p>
+        {% else %}
+        <p class="mb-0">Quickly <a href="https://{{management_domain}}/issues" class="alert-link">log in</a> so we can clear this up!</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="mt-5">
+        <h4>Common Issues</h4>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Issue 1: Description of the common issue</li>
+            <li class="list-group-item">Issue 2: Description of another common issue</li>
+            <li class="list-group-item">Issue 3: Yet another issue description</li>
+        </ul>
+    </div>
+
+</div>
+
+{% include 'issues/support-request.html' %}
+
+{% endblock %}
+
+{% block extrajs %}
+<style>
+    .select-wrapper {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+</style>
+
+<script>
+    document.querySelector('#team-select').onchange = function(e) {
+        var teamName = this.value;
+        var user = '{{user}}';
+        if (teamName) {
+            window.location.pathname = 'issues/support/' + teamName + '/'+ user;
+        }
+    };
+</script>
+{% endblock extrajs %}

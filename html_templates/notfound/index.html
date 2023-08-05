@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+{% block title %}Resource not found{% endblock %}
+{% block content %}
+    <h3>A message from the team at {{management_domain}}</h3>
+    <h1>Sorry, the resource you have requested cannot be given!</h1>
+    <hr>
+    <p>If you are you are an admin of {{tenant}}, please follow this link so so we can get back on track. <a href="http://{{management_domain}}:8000/issues">here</a></p>
+    
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title class="bg-dark text-white">Welcome</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-3">Welcome to Django tenancy</h1>
+        <hr class="my-4">
+        <h4 class="text-muted">Current Tenant: <strong>{{ tenant }}</strong></h4>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Issues</h5>
+                    <p class="card-text">Facing any problems? We're here to help.</p>
+                    <a href="{% if dev_mode %}http://{% else %}https://{% endif %}{{management_domain}}{% if dev_mode %}:8000{% endif %}/issues" class="btn btn-outline-primary">
+                        Report an Issue
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Join Us</h5>
+                    <p class="card-text">Become a tenant and explore our offerings.</p>
+                    <a href="{% if dev_mode %}http://{% else %}https://{% endif %}{{management_domain}}{% if dev_mode %}:8000{% endif %}/signup/" class="btn btn-outline-success">
+                        Sign Up Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 mb-4">
+        <h3>Why this project?</h3>
+        <p class="lead">Our aim is simplifying Django multi-tenant development.</p>
+        <ul class="list-unstyled">
+            <li><i class="bi bi-check-circle-fill text-primary"></i> Opinionated? Absolutely.</li>
+            <li><i class="bi bi-exclamation-circle-fill text-danger"></i> Full of bugs? We're on it!</li>
+        </ul>
+    </div>
+
+    <div class="mt-5">
+        <h3>Current Tenants</h3>
+        
+        {% if tenant_domains %}
+            <ul class="list-group list-group-flush mt-3">
+                {% for domain in tenant_domains %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ domain }}
+                        <a href="{% if dev_mode %}http://{% else %}https://{% endif %}{{ domain }}{% if dev_mode %}:8000{% endif %}" class="btn btn-outline-dark btn-sm">
+                            <i class="bi bi-arrow-right"></i> Visit
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted mt-3">No tenants registered currently.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

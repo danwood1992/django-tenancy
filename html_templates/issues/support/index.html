@@ -1,0 +1,220 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title>Support</title>
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_superuser %}
+
+<div class="container mt-5 mb-5">
+
+    <!-- Introduction and Support Information -->
+    <div class="mb-5 text-center">
+        <h1 class="mb-4">Tenant Support Live Chat</h1><h1 class='text-danger'> Logged in as admin support </h1>
+        <small>Support: {{user.username}}</small>
+        <hr>
+        <p>Please remember end users may find simple tasks <b>difficult</b> </p>
+    </div>
+    
+    <!-- Chat Section -->
+ 
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">You are Support team {{ teamName }}</div>
+                <div class="card-body">
+                    <div id="chat-log" class="form-control mb-3" style="height: 300px; overflow-y: scroll;"></div>
+
+                    <div class="input-group">
+                        <input id="chat-message-input" type="text" class="form-control" placeholder="Type your message...">
+                        <button id="chat-message-submit" class="btn btn-primary" type="button">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ teamName|json_script:"teamName" }}
+
+    <!-- FAQ Section -->
+<div class="mb-5">
+    <h2 class="mb-4">Frequently Asked Questions</h2>
+    <div class="accordion shadow-lg" id="faqAccordion">  <!-- added shadow for depth -->
+
+        <!-- First FAQ Item -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="bi bi-question-circle-fill me-2"></i>  <!-- Bootstrap icon for added visual touch -->
+                    How do I reset my password?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    <i class="bi bi-info-circle-fill me-2"></i>  <!-- Bootstrap icon for consistent design -->
+                    Click on the "Forgot Password" link on the login page to reset your password. An email will be sent with instructions.
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample FAQ Item 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <i class="bi bi-question-circle-fill me-2"></i>
+                    How can I change my subscription plan?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    Navigate to your account settings and select 'Subscription'. From there, you can change or upgrade your plan.
+                </div>
+            </div>
+        </div>
+
+        <!-- ... add more accordion items for other FAQs ... -->
+    </div>
+</div>
+
+    <!-- Additional Contact Information -->
+    <div>
+        <h2 class="mb-4">Other Ways to Reach Us</h2>
+        <p><strong>Email:</strong> support@{{management_domain}}</p>
+        <p><strong>Phone:</strong> +1-800-123-4567</p>
+        <p><strong>Address:</strong> 123 Support St., Helpville, 12345</p>
+    </div>
+</div>
+
+
+{% endif %} <!-- end of if user.is_superuser -->
+
+
+<div class="container mt-5 mb-5">
+
+    <!-- Introduction and Support Information -->
+    <div class="mb-5 text-center">
+        <h1 class="mb-4">Tenant Support Live Chat</h1></h1>
+        <p>Welcome to our support page. We're here to help! If you have any questions or issues, you can chat with our team directly, or find solutions in our FAQ section below.</p>
+    </div>
+    
+    <!-- Chat Section -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">Support team: {{ teamName }}</div>
+                <div class="card-body">
+                    <div id="chat-log" class="form-control mb-3" style="height: 300px; overflow-y: scroll;"></div>
+
+                    <div class="input-group">
+                        <input id="chat-message-input" type="text" class="form-control" placeholder="Type your message...">
+                        <button id="chat-message-submit" class="btn btn-primary" type="button">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ teamName|json_script:"teamName" }}
+
+    <!-- FAQ Section -->
+<div class="mb-5">
+    <h2 class="mb-4">Frequently Asked Questions</h2>
+    <div class="accordion shadow-lg" id="faqAccordion">  <!-- added shadow for depth -->
+
+        <!-- First FAQ Item -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="bi bi-question-circle-fill me-2"></i>  <!-- Bootstrap icon for added visual touch -->
+                    How do I reset my password?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    <i class="bi bi-info-circle-fill me-2"></i>  <!-- Bootstrap icon for consistent design -->
+                    Click on the "Forgot Password" link on the login page to reset your password. An email will be sent with instructions.
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample FAQ Item 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <i class="bi bi-question-circle-fill me-2"></i>
+                    How can I change my subscription plan?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    Navigate to your account settings and select 'Subscription'. From there, you can change or upgrade your plan.
+                </div>
+            </div>
+        </div>
+
+        <!-- ... add more accordion items for other FAQs ... -->
+    </div>
+</div>
+
+    <!-- Additional Contact Information -->
+    <div>
+        <h2 class="mb-4">Other Ways to Reach Us</h2>
+        <p><strong>Email:</strong> support@{{management_domain}}</p>
+        <p><strong>Phone:</strong> +1-800-123-4567</p>
+        <p><strong>Address:</strong> 123 Support St., Helpville, 12345</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extrajs %}
+
+<script>
+    const teamName = JSON.parse(document.getElementById('teamName').textContent);
+    console.log(teamName);
+    console.log('{{ user }}');
+    const chatSocket = new WebSocket(
+        'wss://' + window.location.host + '/wss/issues/support/' + teamName + '/' + '{{ user }}' + '/'
+    );
+
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const messageElem = document.createElement('div');
+    
+        if(data.sender === '{{ user }}') {
+            messageElem.className = 'text-success';
+            messageElem.textContent = 'Me: ' + data.message;
+        } else {
+            messageElem.className = 'text-danger';
+            messageElem.textContent = data.sender + ': ' + data.message;
+        }
+    
+        document.querySelector('#chat-log').appendChild(messageElem);
+    };
+    
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.key === 'Enter') {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        const messageInputDom = document.querySelector('#chat-message-input');
+        const message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'sender': '{{ user }}'
+        }));
+    
+        messageInputDom.value = '';
+    };
+</script>
+{% endblock extrajs %}

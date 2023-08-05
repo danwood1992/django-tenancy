@@ -1,0 +1,71 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title class="bg-dark text-white">Welcome</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+        <h1>Welcome</h1>
+        <hr>
+        <h4>Current Tenant |  {{tenant}}</h4>
+    </div>
+
+    {% if dev_mode %}
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Issues</h5>
+                    <p class="card-text">Facing any problems? Click the button below to report an issue.</p>
+                    <a href="http://{{management_domain}}:8000/issues" class="btn btn-secondary">I have an issue</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Join Us</h5>
+                    <p class="card-text">Not a tenant yet? Sign up to learn more.</p>
+                    <a href="http://{{management_domain}}:8000/signup/" class="btn btn-secondary">Signup</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="row mb-4">
+        <div class="col-md-6 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Issues</h5>
+                    <p class="card-text">Facing any problems? Click the button below to report an issue.</p>
+                    <a href="https://{{management_domain}}/issues" class="btn btn-secondary">I have an issue</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Join Us</h5>
+                    <p class="card-text">Not a tenant yet? Sign up to learn more.</p>
+                    <a href="https://{{management_domain}}/signup/" class="btn btn-secondary">Signup</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Additional Content -->
+    <div class="mt-5">
+        <h3>Why Django Tenants?</h3>
+        <p>The projects objective is to streamline the development of django multitenant projects.</p>
+        <ul>
+            <li>Feature 1: Dedicated support and quick issue resolution.</li>
+            <li>Feature 2: User-friendly interface with intuitive navigation.</li>
+            <li>Feature 3: Secure platform ensuring data privacy and protection.</li>
+        </ul>
+    </div>
+
+</div>
+{% endblock %}

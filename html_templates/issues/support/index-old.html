@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <title>Issues</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <div class="text-center mb-4">
+        <h3 class="text-muted">{{management_domain}} | Support</h3>
+        <h1>Sorry, you're having issues!</h1>
+    </div>
+
+    <hr>
+    
+    {% if not user.is_authenticated %}
+    <div class="alert alert-warning mt-4">
+        {% if dev_mode %}
+        <p class="mb-0">Bypass security checks <a href="http://{{management_domain}}:8000/issues" class="alert-link">log in</a></p>
+        {% else %}
+        <p class="mb-0">Bypass security checks<a href="https://{{management_domain}}/issues" class="alert-link">log in</a></p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="mt-5 form">
+        <h6>One of our team members will be with you shortly.</h6>
+
+        <!-- Chat Window -->
+        <div class="card chat-window shadow">
+            <div class="card-header text-center bg-primary text-white">
+                Live Chat
+            </div>
+            <div class="card-body chat-body bg-light px-5 py-4">
+                <!-- Messages will be appended here -->
+                <div class="mb-3 text-end">
+                    <div class="badge rounded-pill bg-info">Hello! I have an issue.</div>
+                </div>
+                <div class="mb-3 text-start">
+                    <div class="badge rounded-pill bg-secondary">Hi! How can I help you? </div>
+                    <small class="text-muted">sent just now</small>
+                </div>
+            </div>
+            <div class="card-footer chat-input px-5 py-3">
+                <div class="d-flex">
+                    <textarea id="chat-message" class="form-control me-2" placeholder="Type your message..." rows="2"></textarea>
+                    <button id="send-message" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Issue 1: Description of the common issue</li>
+            <li class="list-group-item">Issue 2: Description of another common issue</li>
+            <li class="list-group-item">Issue 3: Yet another issue description</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    // Sample JS to handle message sending (won't actually send without backend setup)
+    document.querySelector('#send-message').addEventListener('click', function() {
+        var message = document.querySelector('#chat-message').value;
+        if (message) {
+            var messageDiv = document.createElement('div');
+            messageDiv.className = 'mb-3 text-end';
+            
+            var badge = document.createElement('div');
+            badge.className = 'badge rounded-pill bg-info';
+            badge.innerText = message;
+
+            messageDiv.appendChild(badge);
+            document.querySelector('.chat-body').appendChild(messageDiv);
+            document.querySelector('#chat-message').value = '';
+        }
+    });
+</script>
+{% endblock extrajs %}

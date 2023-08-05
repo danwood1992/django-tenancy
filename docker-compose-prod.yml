@@ -1,0 +1,45 @@
+
+services:
+  django-tenancy-backend:
+    build:
+      context: .
+      dockerfile: ./compose/production/Dockerfile
+    image: django-tenancy-backend
+    command: /start
+    volumes:
+      - .:/opt/django-tenancy
+    expose:
+      - "8002"
+    env_file:
+      - ./.env/.prod
+    depends_on:
+      - django-tenancy-db
+      - django-tenancy-redis
+  
+  django-tenancy-nginx:
+    build: ./compose/production/nginx
+    ports:
+      - "8082:80"
+    depends_on:
+      - django-tenancy-backend
+    volumes:
+      - .:/opt/django-tenancy
+  
+  django-tenancy-db:
+    image: postgres:14.4
+    volumes:
+      - django-tenancy_postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+    env_file:
+      - ./.env/.prod
+
+  django-tenancy-redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    
+  
+
+volumes:
+  django-tenancy_postgres_data:
