@@ -149,7 +149,7 @@ MESSAGE_TAGS = {
 # api settings
 
 GRAPHENE = {
-    "SCHEMA": "core.schema.schema"
+    "SCHEMA": "django_tenancy.schema.schema"
 }
 
 # multitenant settings
