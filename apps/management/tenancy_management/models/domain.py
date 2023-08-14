@@ -18,8 +18,6 @@ class Domain(models.Model):
 
             self.primary = True
             
-       
-        
         with transaction.atomic():
             # If this domain is marked as primary, unset other primary domains for this tenant
             if self.primary:

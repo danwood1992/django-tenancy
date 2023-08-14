@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Index
-from apps.administration.tenancy_management.models.tenant import Tenant
-from apps.administration.tenancy_management.utils import seat_personal_upload_path
+from apps.management.tenancy_management.models.tenant import Tenant
+from apps.management.tenancy_management.utils import seat_personal_upload_path
 from django.contrib.auth import get_user_model
 import uuid
 import logging

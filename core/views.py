@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from django.conf import settings
 import logging
 from django.http import Http404, HttpResponseRedirect
-from apps.administration.tenancy_management.models.domain import Domain
+from apps.management.tenancy_management.models.domain import Domain
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -18,12 +18,18 @@ class TenantInQuestionMixin:
     """
     
     def get_context_data(self, **kwargs):
+        """
+        Returns the context data for the view, including the tenant_in_question variable.
+        """
         context = super().get_context_data(**kwargs)
         context['tenant_in_question'] = self.kwargs.get('tenant_in_question')
         logging.info(f"Tenant in question - {context['tenant_in_question']}")
         return context
     
     def logfunction(self, message):
+        """
+        Logs the given message to the logging system.
+        """
         logging.info(message)
         
 

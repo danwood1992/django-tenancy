@@ -44,12 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
-    'apps.administration.tenancy_management',
+    'apps.management.tenancy_management',
     'apps.tenant.seats',
 ]
 
 MIDDLEWARE = [
-    'apps.administration.tenancy_management.middleware.domainrequest.DomainMiddleware',
+    'apps.management.tenancy_management.middleware.domainrequest.DomainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -68,7 +68,7 @@ The folder structure is as follows:
 ├── README.md
 ├── app.log
 ├── apps
-│   ├── administration
+│   ├── management
 │   │   ├── __init__.py
 │   │   └── tenant_management
 │   │       ├── __init__.py
@@ -147,7 +147,7 @@ You can obviously change this to suit your needs.
 
 Out of the box a django test command may look like this.
 
-```docker-compose exec django_tenancy-backend python3 manage.py test apps.administration.tenant_management.tests```
+```docker-compose exec django_tenancy-backend python3 manage.py test apps.management.tenant_management.tests```
 
 <hr>
 

@@ -10,7 +10,7 @@ class TenantModelTest(TestCase):
             is_active=True,
             paid_until=datetime.now() + timedelta(days=30),
             name='Test Tenant',
-            management_realm=False
+            management_tenant=False
         )
 
     def test_tenant_creation(self):
@@ -24,11 +24,10 @@ class DomainModelTest(TestCase):
             is_active=True,
             paid_until=datetime.now() + timedelta(days=30),
             name='Test Tenant',
-            management_realm=False
+            management_tenant=False
         )
         self.domain = Domain.objects.create(
-            full_domain='www.test.com',
-            subdomain_prefix='test',
+            domain_name='www.test.com',
             tenant=self.tenant
         )
 
