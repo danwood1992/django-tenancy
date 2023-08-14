@@ -89,7 +89,7 @@
 </div>
 
 
-{% endif %} <!-- end of if user.is_superuser -->
+{% else %} <!-- end of if user.is_superuser -->
 
 
 <div class="container mt-5 mb-5">
@@ -167,6 +167,7 @@
         <p><strong>Address:</strong> 123 Support St., Helpville, 12345</p>
     </div>
 </div>
+{% endif %}
 {% endblock %}
 
 {% block extrajs %}
