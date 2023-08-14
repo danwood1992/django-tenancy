@@ -61,12 +61,12 @@ MIDDLEWARE = [
 ]
 
 #channels 
-ASGI_APPLICATION = "core.asgi.application"
+ASGI_APPLICATION = "django_tenancy.asgi.application"
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("django-tenancy-redis", 6379)], # use redis container name
+            "hosts": [("django_tenancy-redis", 6379)], # use redis container name
         },
     },
 }
@@ -74,7 +74,7 @@ CHANNEL_LAYERS = {
 
 
 
-ROOT_URLCONF = 'core.urls'
+ROOT_URLCONF = 'django_tenancy.urls'
 
 TEMPLATES = [
     {
@@ -92,7 +92,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'core.wsgi.application'
+WSGI_APPLICATION = 'django-tenancy.wsgi.application'
 
 DATABASES = {
     'default': {
