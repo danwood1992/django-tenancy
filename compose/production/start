@@ -7,6 +7,6 @@ set -o nounset
 python3 manage.py collectstatic --noinput
 python3 manage.py migrate
 # gunicorn core.wsgi:application --bind 0.0.0.0:8002
-daphne -b 0.0.0.0 -p 8002 core.asgi:application
+daphne -b 0.0.0.0 -p 8002 django_tenancy.asgi:application
 
 
