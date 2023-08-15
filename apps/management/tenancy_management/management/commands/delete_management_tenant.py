@@ -2,7 +2,7 @@ from typing import Union
 from django.core.management.base import BaseCommand
 from apps.management.tenancy_management.models.domain import Domain
 from apps.management.tenancy_management.models.tenant import Tenant
-from apps.tenant.seats.models import StaffSeat
+from apps.core.seats.models import StaffSeat
 from django.contrib.auth.models import User
 from django.conf import settings
 

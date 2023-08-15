@@ -18,7 +18,6 @@ logging.basicConfig(
 
 DEBUG = os.environ.get('DEBUG', 0)
 
-
 DEV_MODE = os.environ.get('DEV_MODE', 0)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'graphene_django',
     'apps.management.tenancy_management',
-    'apps.tenant.seats',
+    'apps.core.seats',
 ]
 
 MIDDLEWARE = [
@@ -70,8 +69,6 @@ CHANNEL_LAYERS = {
         },
     },
 }
-
-
 
 
 ROOT_URLCONF = 'django_tenancy.urls'
@@ -147,7 +144,6 @@ MESSAGE_TAGS = {
 }
 
 # api settings
-
 GRAPHENE = {
     "SCHEMA": "django_tenancy.schema.schema"
 }
@@ -158,9 +154,6 @@ GRAPHENE = {
 MANAGEMENT_DOMAIN = os.environ.get('MANAGEMENT_DOMAIN', 'fusehub.imperisoft.co.uk')
 
 USE_DJANGO_TEMPLATES = True
-
-
-    
 
 NO_MANAGEMENT_TENANT_REDIRECT = 'https://github.com/danwood1992/django-tenancy'
 
@@ -174,7 +167,6 @@ FAILED_SUBSCRIPTION_CHECK = f'https://{MANAGEMENT_DOMAIN}/<tenant_in_question>/i
 logger = logging.getLogger(__name__)
 logger.info(f"------------ Tenancy configuration ----------------")
 logger.info(f" Management domain - https://{MANAGEMENT_DOMAIN} ")
-logger.info(f" Dev mode - {DEV_MODE} ")
 logger.info(f" No management tenant redirect - {NO_MANAGEMENT_TENANT_REDIRECT} ")
 logger.info(f" No domain redirect - {NO_DOMAIN_REDIRECT} ")
 logger.info(f" Failed subscription check - {FAILED_SUBSCRIPTION_CHECK} ")
