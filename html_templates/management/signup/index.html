@@ -5,37 +5,39 @@
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card rounded shadow mb-4">
-                <div class="card-header bg-dark text-white">
-                    Sign Up
-                </div>
-                <div class="card-body ">
-                    <form action="{% url 'home' %}" method="post">
-                        {% csrf_token %}
 
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card rounded shadow mb-4">
+                        <div class="card-header bg-dark text-white">
+                            Realm sign up  {% if user.is_authenticated %} As you already have an account use a diferent email! {% if user.staffseat_related %} {% endif%}{% endif %}
                         </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                        <div class="card-body ">
+                            <form action="{% url 'home' %}" method="post">
+                                {% csrf_token %}
+
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Realm name<span class="small text-muted"> This must be lowercase with no spaces</span></label>
+                                    <input type="text" class="form-control" id="username" name="username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                        
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                  
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary">Sign Up</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+ 
 {% endblock %}

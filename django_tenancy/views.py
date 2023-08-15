@@ -82,7 +82,7 @@ class BaseView(TemplateView):
         context['user'] = self.request.user
         if self.request.user.is_superuser:
             context['superuser'] = self.request.user
-
+       
         return context
     
 
@@ -171,6 +171,10 @@ class SupportView(BaseView):
     
 class SignUpView(TenantInQuestionMixin, BaseView):
     template_name = 'signup.html'
+    
+    def get_context_data(self, **kwargs):
+        
+        return super().get_context_data(**kwargs)
         
     def get_template_names(self):
         tenant = getattr(self.request, 'current_tenant', None)
