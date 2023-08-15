@@ -12,7 +12,7 @@
 <body class=""> <!-- Assuming you wanted the Bootstrap "danger" red color. "bg-red" is not a standard class in Bootstrap 5 -->
 
     {% include 'base/navbar.html' %}
-
+    {% include 'base/login-modal.html' %}
     {% include 'base/alerts.html' %}
 
     <main>
@@ -26,7 +26,56 @@
     <!-- Popper.js first, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1do4A+gf8k5l7l4lMz4i3WDQn1Z7y/JonasIUNsobU+KlXo4l3o5eD3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0v8FqFjcJ6pajs/rfdfs3SO+kD5tr5Szkbe5Ff0J/kFf4yXz" crossorigin="anonymous"></script>
+   
+    <script>
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginError = document.getElementById('loginError');
+          
+            // GraphQL query for authentication
+            const query = `
+              mutation {
+                tokenAuth(username: "${username}", password: "${password}") {
+                  token
+                }
+              }
+            `;
+          
+            const response = await fetch('/graphql/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+              },
+              body: JSON.stringify({
+                query: query,
+              }),
+            });
+          
+            const result = await response.json();
+          
+            if (result.data && result.data.tokenAuth && result.data.tokenAuth.token) {
+              // Store the token as you see fit (localStorage, cookies, etc.)
+              localStorage.setItem('authToken', result.data.tokenAuth.token);
+          
+              // Refresh the page
+              location.reload();
+            } else {
+              // Display an error message if login fails
+              loginError.innerText = 'Invalid username or password.';
+            }
+          }
+          fetch('/your-endpoint/', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${authToken}` // Use the token here
+  },
+  body: JSON.stringify(yourData) // yourData is the data you want to send to the server
+});
 
+    </script>
 
     {% block extrajs %} 
     {% endblock extrajs %}
