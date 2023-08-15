@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 from graphene_django.views import GraphQLView
-from .views import HomeView, NotPaidView, SignUpView, IssuesView, ContactView, SupportView, login_view
+from .views import HomeView, NotPaidView, SignUpView, IssuesView, ContactView, SupportView, login_view, logout_view
 from apps.core.todo.views import ToDoView
 from django.conf import settings
 # Django docs have a guide on how to use csrf exempt with graphene - https://docs.djangoproject.com/en/3.0/ref/csrf/#ajax
@@ -22,6 +22,7 @@ admin_patterns = [
 tenant_patterns = [
     path('', HomeView.as_view(), name='home'),
     path('login/', login_view, name='login_view'),
+    path('logout/', logout_view, name='logout'),
     path('<tenant_in_question>/unpaid', NotPaidView.as_view(), name='unpaid'),
     path('<tenant_in_question>/signup', SignUpView.as_view(), name='signup'),
     path('signup/', SignUpView.as_view(), name='signup'),

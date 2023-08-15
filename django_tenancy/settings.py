@@ -3,6 +3,7 @@ import datetime
 from django.contrib import messages
 import logging
 import os
+from datetime import timedelta
 
 #Basic config for logging add logging.info(f"string{}") in your code to log to the file
 
@@ -154,6 +155,10 @@ MESSAGE_TAGS = {
 # api settings
 GRAPHENE = {
     "SCHEMA": "django_tenancy.schema.schema"
+}
+GRAPHQL_JWT = {
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=720),  # 1 hour
 }
 
 # multitenant settings

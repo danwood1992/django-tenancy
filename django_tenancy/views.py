@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from graphql_jwt.exceptions import JSONWebTokenError
 from graphql_jwt.shortcuts import get_token
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from apps.admin.tenancy.models.domain import Domain
 
 User = get_user_model()
@@ -53,6 +53,12 @@ def login_view(request):
             return JsonResponse({'status': 'success'})
         else:
             return JsonResponse({'status': 'error', 'message': 'Invalid credentials'})
+    return JsonResponse({'status': 'error', 'message': 'Unsupported method'})
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Unsupported method'})
 
 
