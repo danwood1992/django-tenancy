@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <h5 class="card-title text-primary">Issues</h5>
                     <p class="card-text">Facing any problems? We're here to help.</p>
-                    <a href="{% if dev_mode %}http://{% else %}https://{% endif %}{{management_domain}}{% if dev_mode %}:8000{% endif %}/issues" class="btn btn-outline-primary">
+                    <a href="https://{{management_domain}}/issues" class="btn btn-outline-primary">
                         Report an Issue
                     </a>
                 </div>
@@ -30,7 +30,7 @@
                 <div class="card-body">
                     <h5 class="card-title text-success">Join Us</h5>
                     <p class="card-text">Become a tenant and explore our offerings.</p>
-                    <a href="{% if dev_mode %}http://{% else %}https://{% endif %}{{management_domain}}{% if dev_mode %}:8000{% endif %}/signup/" class="btn btn-outline-success">
+                    <a href="https://{{management_domain}}/signup/" class="btn btn-outline-success">
                         Sign Up Now
                     </a>
                 </div>
@@ -55,7 +55,7 @@
                 {% for domain in tenant_domains %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         {{ domain }}
-                        <a href="{% if dev_mode %}http://{% else %}https://{% endif %}{{ domain }}{% if dev_mode %}:8000{% endif %}" class="btn btn-outline-dark btn-sm">
+                        <a href="https://{{ domain }}" class="btn btn-outline-dark btn-sm">
                             <i class="bi bi-arrow-right"></i> Visit
                         </a>
                     </li>

@@ -99,11 +99,9 @@ class IssuesView(BaseView):
         page = 'issues'
         
       
-        if not tenant or not tenant.management_tenant:
+        if not tenant or not tenant.management_tenant: #change logic to do 
             logger.info(f"{request.get_host()} Attempting to access issues page from own domain. Redirecting to management domain")
             # Redirect to the management domain's issues page if tenant is not a management tenant
-            if settings.DEV_MODE:
-                return HttpResponseRedirect(f"http://{settings.MANAGEMENT_DOMAIN}:8000/{page}")
             return HttpResponseRedirect(f"https://{settings.MANAGEMENT_DOMAIN}/{page}")
         return super(IssuesView, self).get(request, *args, **kwargs)
     
@@ -135,8 +133,7 @@ class SupportView(BaseView):
         if not tenant or not tenant.management_tenant:
             logger.info(f"{request.get_host()} Attempting to access issues page from own domain. Redirecting to management domain")
             # Redirect to the management domain's issues page if tenant is not a management tenant
-            if settings.DEV_MODE:
-                return HttpResponseRedirect(f"http://{settings.MANAGEMENT_DOMAIN}:8000/{page}")
+            
             return HttpResponseRedirect(f"https://{settings.MANAGEMENT_DOMAIN}/{page}")
         
         return super().get(request, *args, **kwargs)

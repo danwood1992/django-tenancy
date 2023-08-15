@@ -159,31 +159,22 @@ MANAGEMENT_DOMAIN = os.environ.get('MANAGEMENT_DOMAIN', 'fusehub.imperisoft.co.u
 
 USE_DJANGO_TEMPLATES = True
 
-# Redirects Define the  protocol and port based on DEV_MODE
 
-if DEV_MODE:
-    PROTOCOL = 'http'
-    PORT = ':8000'
-else:
-    PROTOCOL = 'https'
-    PORT = ':443'
     
 
 NO_MANAGEMENT_TENANT_REDIRECT = 'https://github.com/danwood1992/django-tenancy'
 
-NO_DOMAIN_REDIRECT = f'{PROTOCOL}://{MANAGEMENT_DOMAIN}{PORT}/<tenant_in_question>/signup'
+NO_DOMAIN_REDIRECT = f'https://{MANAGEMENT_DOMAIN}/<tenant_in_question>/signup'
 
-FAILED_SUBSCRIPTION_CHECK = f'{PROTOCOL}://{MANAGEMENT_DOMAIN}{PORT}/<tenant_in_question>/issues'
+FAILED_SUBSCRIPTION_CHECK = f'https://{MANAGEMENT_DOMAIN}/<tenant_in_question>/issues'
 
 
 #logging for settings debug file in logs/server.log
 
 logger = logging.getLogger(__name__)
 logger.info(f"------------ Tenancy configuration ----------------")
-logger.info(f" Management domain - https://{MANAGEMENT_DOMAIN}:443 ")
+logger.info(f" Management domain - https://{MANAGEMENT_DOMAIN} ")
 logger.info(f" Dev mode - {DEV_MODE} ")
-logger.info(f" Protocol - {PROTOCOL} ")
-logger.info(f" Port - {PORT} ")
 logger.info(f" No management tenant redirect - {NO_MANAGEMENT_TENANT_REDIRECT} ")
 logger.info(f" No domain redirect - {NO_DOMAIN_REDIRECT} ")
 logger.info(f" Failed subscription check - {FAILED_SUBSCRIPTION_CHECK} ")

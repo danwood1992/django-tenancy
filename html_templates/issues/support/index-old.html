@@ -16,11 +16,9 @@
     
     {% if not user.is_authenticated %}
     <div class="alert alert-warning mt-4">
-        {% if dev_mode %}
-        <p class="mb-0">Bypass security checks <a href="http://{{management_domain}}:8000/issues" class="alert-link">log in</a></p>
-        {% else %}
+      
         <p class="mb-0">Bypass security checks<a href="https://{{management_domain}}/issues" class="alert-link">log in</a></p>
-        {% endif %}
+    
     </div>
     {% endif %}
 
