@@ -93,6 +93,7 @@
             e.preventDefault();
         
             // Collect form data
+            const authToken = localStorage.getItem('authToken');
             const assignedById = document.getElementById('assignedById').value;
             const assignedToId = document.getElementById('assignedToId').value;
             const categoryId = parseInt(document.getElementById('categoryId').value); // Parse as Int
@@ -135,6 +136,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
                     // Add any other necessary headers, like CSRF tokens or authentication headers
                 },
                 body: JSON.stringify({

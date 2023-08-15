@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from graphql_jwt.exceptions import JSONWebTokenError
 from graphql_jwt.shortcuts import get_token
-
+from django.contrib.auth import authenticate, login
 from apps.admin.tenancy.models.domain import Domain
 
 User = get_user_model()
@@ -39,6 +39,23 @@ class TenantInQuestionMixin:
         """
         logging.info(message)
         
+
+
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Invalid credentials'})
+    return JsonResponse({'status': 'error', 'message': 'Unsupported method'})
+
+
 
 
 class BaseView(TemplateView):

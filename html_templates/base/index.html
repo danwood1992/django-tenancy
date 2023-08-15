@@ -32,48 +32,53 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const loginError = document.getElementById('loginError');
-          
-            // GraphQL query for authentication
-            const query = `
-              mutation {
-                tokenAuth(username: "${username}", password: "${password}") {
-                  token
-                }
-              }
-            `;
-          
-            const response = await fetch('/graphql/', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-              },
-              body: JSON.stringify({
-                query: query,
-              }),
+            // Get CSRF token from the form
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            // Traditional Django Login
+            const djangoLoginResponse = await fetch('/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrfToken
+                },
+                body: `username=${username}&password=${password}`
             });
-          
-            const result = await response.json();
-          
-            if (result.data && result.data.tokenAuth && result.data.tokenAuth.token) {
-              // Store the token as you see fit (localStorage, cookies, etc.)
-              localStorage.setItem('authToken', result.data.tokenAuth.token);
-          
-              // Refresh the page
-              location.reload();
-            } else {
-              // Display an error message if login fails
-              loginError.innerText = 'Invalid username or password.';
+        
+            const djangoResult = await djangoLoginResponse.json();
+        
+            if (djangoResult.status !== 'success') {
+                loginError.innerText = djangoResult.message || 'Error logging in.';
+                return; // Exit if traditional login failed.
             }
-          }
-          fetch('/your-endpoint/', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${authToken}` // Use the token here
-  },
-  body: JSON.stringify(yourData) // yourData is the data you want to send to the server
-});
+        
+            // GraphQL JWT Authentication (assuming you have the endpoint and mutation setup)
+            const query = `
+                mutation {
+                    tokenAuth(username: "${username}", password: "${password}") {
+                        token
+                    }
+                }
+            `;
+        
+            const jwtResponse = await fetch('/graphql/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ query: query }),
+            });
+        
+            const jwtResult = await jwtResponse.json();
+        
+            if (jwtResult.data && jwtResult.data.tokenAuth && jwtResult.data.tokenAuth.token) {
+                localStorage.setItem('authToken', jwtResult.data.tokenAuth.token);
+                location.reload(); // Or any other action you'd like to take after successful login.
+            } else {
+                loginError.innerText = 'Error getting JWT token.';
+            }
+        }
+        
 
     </script>
 
