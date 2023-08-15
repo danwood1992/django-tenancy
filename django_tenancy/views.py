@@ -1,11 +1,18 @@
+import logging
 from typing import Any
+
 from django import http
+from django.conf import settings
+from django.contrib.auth import get_user_model, login
+from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.conf import settings
-import logging
-from django.http import Http404, HttpResponseRedirect
+from graphql_jwt.exceptions import JSONWebTokenError
+from graphql_jwt.shortcuts import get_token
+
 from apps.admin.tenancy.models.domain import Domain
+
+User = get_user_model()
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -38,9 +45,10 @@ class BaseView(TemplateView):
     """
     Base View for other views
     """
-           
+
+   
+
     def get_context_data(self, **kwargs):
-        
         context = super().get_context_data(**kwargs)
         tenant = getattr(self.request, 'current_tenant', None)
         dev_mode = getattr(settings, 'DEV_MODE', 0)
@@ -51,7 +59,7 @@ class BaseView(TemplateView):
         context['user'] = self.request.user
         if self.request.user.is_superuser:
             context['superuser'] = self.request.user
-    
+
         return context
     
 

@@ -41,7 +41,7 @@ psycopg2==2.9.7 # PostgreSQL adapter for Python.
 cryptography==41.0.3 # Cryptographic recipes and primitives.
 pyOpenSSL==23.2.0 # Python wrapper module around the OpenSSL library.
 service-identity==23.1.0 # Service identity verification for PyOpenSSL.
-
+django-graphql-jwt==0.4.0 # JSON Web Token for Django GraphQL.
 # Miscellaneous Libraries:
 Automat==22.10.0 # Self-service finite-state machines.
 cffi==1.15.1 # Foreign Function Interface for Python calling C code.

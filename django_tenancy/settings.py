@@ -33,6 +33,12 @@ CSRF_TRUSTED_ORIGINS = ['https://*.fusehub.imperisoft.co.uk', "https://fusehub.i
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
+    'django.contrib.auth.backends.ModelBackend'
+]
+
+
 INSTALLED_APPS = [
     "daphne",
     "channels",

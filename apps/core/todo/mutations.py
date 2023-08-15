@@ -23,7 +23,7 @@ class CreateTaskAndAssign(graphene.Mutation):
 
     def mutate(self, info, tenant_id, category_id, title, assigned_by_id, assigned_to_id, description=None, due_date=None):
         # First, get the objects needed for ForeignKeys
-        print("CreateTaskAndAssign mutation")
+
         tenant = Tenant.objects.get(id=tenant_id)
         category = Category.objects.get(id=category_id)
         assigned_by = StaffSeat.objects.get(id=assigned_by_id)
