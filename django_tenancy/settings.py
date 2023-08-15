@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'apps.admin.tenancy',
     'apps.core.seats',
+    'apps.core.todo',
 ]
 
 MIDDLEWARE = [

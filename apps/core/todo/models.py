@@ -50,9 +50,9 @@ class Task(models.Model): # task itself
     
 class Assignment(models.Model):
     
-    tasked_by = models.ForeignKey(StaffSeat, on_delete=models.CASCADE)
+    assigned_by = models.ForeignKey(StaffSeat, on_delete=models.CASCADE, related_name='assigned_by')
     task = models.ForeignKey('Task', on_delete=models.CASCADE)
-    assignee = models.ForeignKey(StaffSeat, on_delete=models.CASCADE)
+    assigned_to = models.ForeignKey(StaffSeat, on_delete=models.CASCADE, related_name='assigned_to')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
