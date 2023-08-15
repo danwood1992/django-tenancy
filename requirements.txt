@@ -1,37 +1,54 @@
-aniso8601==9.0.1
-asgiref==3.7.2
-attrs==23.1.0
-autobahn==23.6.2
-Automat==22.10.0
-cffi==1.15.1
-channels==4.0.0
-constantly==15.1.0
-cryptography==41.0.3
-daphne==4.0.0
-Django==4.2.4
-graphene==3.2.2
-graphene-django==3.1.2
-graphql-core==3.2.3
-graphql-relay==3.2.0
-gunicorn==20.1.0
-hyperlink==21.0.0
-idna==3.4
-incremental==22.10.0
-Pillow==10.0.0
-promise==2.3
-psycopg2==2.9.7
+# Web Framework and Web Server:
+Django==4.2.4 #A high-level Python web framework.
+daphne==4.0.0 # An HTTP, HTTP2, and WebSocket protocol server for Django Channels.
+gunicorn==20.1.0 # A WSGI HTTP server.
+
+# GraphQL Libraries:
+graphene==3.2.2 # A library for building GraphQL APIs in Python.
+graphene-django==3.1.2 # Integrate Django with Graphene.
+graphql-core==3.2.3 # Core functionalities for GraphQL in Python.
+graphql-relay==3.2.0 # Relay specific functionalities for GraphQL.
+
+# Utilities for GraphQL:
+aniso8601==9.0.1 # A library for parsing ISO 8601 formatted strings, used by GraphQL.
+promise==2.3 # A library for promises, used by Graphene.
+
+# Django Asynchronous support and Channels:
+asgiref==3.7.2 # ASGI (Asynchronous Server Gateway Interface) spec and utilities.
+channels==4.0.0 # Django project extension for handling WebSockets, chat protocols, and more.
+channels_redis # Redis backend for Django channels.
+
+# Network and Communication Libraries:
+autobahn==23.6.2 # WebSocket & WAMP for Python on Twisted and asyncio.
+hyperlink==21.0.0 # Immutable, Pythonic, correct URLs.
+Twisted==22.10.0 # Event-driven networking engine.
+
+# Utilities and Misc Libraries:
+attrs==23.1.0 # Classes without boilerplate.
+constantly==15.1.0 # Symbolic constants.
+incremental==22.10.0 # Incremental versioning.
+Pillow==10.0.0 # Python Imaging Library fork for image processing.
+text-unidecode==1.3 # Unicode transliterator.
+typing_extensions==4.7.1 # Backported and experimental type hints.
+tzdata==2023.3 # Time zone database.
+whitenoise==5.3.0 # Static file serving for Python web apps.
+sqlparse==0.4.4 # A non-validating SQL parser.
+
+# Database:
+psycopg2==2.9.7 # PostgreSQL adapter for Python.
+
+# Authentication and Security:
+cryptography==41.0.3 # Cryptographic recipes and primitives.
+pyOpenSSL==23.2.0 # Python wrapper module around the OpenSSL library.
+service-identity==23.1.0 # Service identity verification for PyOpenSSL.
+
+# Miscellaneous Libraries:
+Automat==22.10.0 # Self-service finite-state machines.
+cffi==1.15.1 # Foreign Function Interface for Python calling C code.
+idna==3.4 # Support for the Internationalized Domain Names in Applications.
 pyasn1==0.5.0
-pyasn1-modules==0.3.0
-pycparser==2.21
-pyOpenSSL==23.2.0
-service-identity==23.1.0
-six==1.16.0
-sqlparse==0.4.4
-text-unidecode==1.3
-Twisted==22.10.0
-txaio==23.1.1
-typing_extensions==4.7.1
-tzdata==2023.3
-whitenoise==5.3.0
-zope.interface==6.0
-channels_redis
+pyasn1-modules==0.3.0 # ASN.1 library and modules for Python.
+pycparser==2.21 # C parser in Python.
+six==1.16.0 # Python 2 and 3 compatibility library.
+txaio==23.1.1 # Compatibility API between asyncio/Twisted/Trollius.
+zope.interface==6.0 # Interfaces for Python.
