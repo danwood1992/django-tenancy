@@ -1,0 +1,25 @@
+<!-- Assign Task Modal -->
+<div class="modal fade" id="assignTaskModal" tabindex="-1" aria-labelledby="assignTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="assignTaskModalLabel">Assign New Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="assignTaskForm">
+                    <div class="mb-3">
+                        <label for="taskName" class="form-label">Task Name</label>
+                        <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="taskDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="taskDescription" rows="3" placeholder="Enter task description"></textarea>
+                    </div>
+                    <!-- Add more fields if needed -->
+                    <button type="submit" class="btn btn-primary">Assign Task</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

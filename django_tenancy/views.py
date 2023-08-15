@@ -41,7 +41,6 @@ class BaseView(TemplateView):
            
     def get_context_data(self, **kwargs):
         
-        
         context = super().get_context_data(**kwargs)
         tenant = getattr(self.request, 'current_tenant', None)
         dev_mode = getattr(settings, 'DEV_MODE', 0)
@@ -59,7 +58,6 @@ class BaseView(TemplateView):
 
 class HomeView(BaseView):
     template_name = 'index.html'
-    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -148,5 +146,6 @@ class SignUpView(TenantInQuestionMixin, BaseView):
         if tenant and tenant.management_tenant:
             return ['management/signup/index.html']
         return super().get_template_names()
+    
 
     

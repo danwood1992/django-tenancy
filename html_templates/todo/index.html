@@ -1,0 +1,90 @@
+{% extends 'base/index.html' %}
+
+{% block title %}
+    <title>ToDo App Demo</title>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+    <header class="text-center mb-5">
+        <h1 class="display-4">Welcome to Tenancy To-Do</h1>
+        <p class="lead">Streamline your projects with the most intuitive task management tool.</p>
+    </header>
+
+    {% if not user.is_authenticated %}
+    <div class="alert alert-warning d-flex align-items-center" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-3"></i>
+        <div>
+            You're currently not signed in. <a href="https://{{management_domain}}/issues" class="alert-link">Click here</a> to log in and manage your tasks.
+        </div>
+    </div>
+    {% endif %}
+
+    <section class="my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Features Overview</h3>
+                <ul class="list-group mt-3">
+                    <li class="list-group-item d-flex align-items-center">
+                        <i class="bi bi-people-fill me-2"></i> Organized Group Tasks
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                        <i class="bi bi-person-check-fill me-2"></i> Easy Task Assignments
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                        <i class="bi bi-person-plus-fill me-2"></i> Collaborate with Multiple Assignees
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h3>Techstack in Full swing</h3>
+                <p>This simple to do app is designed to showcase the speed and versatiltiy of graphql and websockets</p>
+                <p>Design your apps how you wish, this will provide you with a working foundation.</p>
+            </div>
+        </div>
+    </section>
+
+    {% if user.is_authenticated %}
+    <section class="bg-light p-4 rounded my-5 card shadow-lg">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="border-bottom pb-3">Your Tasks!</h4>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assignTaskModal">
+                Assign Task
+            </button>
+        </div>
+        {% include 'todo/task-assign-modal.html' %}
+        
+
+    <!-- Non-completed tasks -->
+    <h5 class="mt-3">Pending</h5>
+    <ul style="list-style-type: none;">
+    {% for task in tasks_assigned %}
+        {% if not task.task.completed %}
+            <li>
+                {{ task }} <span class="text-muted">- Assigned by {{task.assigned_by}} {{ task.created_at|date:'F j, Y' }}</span>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+
+    <!-- Completed tasks -->
+    <h5 class="mt-3">Completed</h5>
+    <ul style="list-style-type: none;">
+    {% for task in tasks_assigned %}
+        {% if task.task.completed %}
+            <li>
+                <span class="text-decoration-line-through">{{ task }}</span> <span class="text-muted">- Assigned by {{task.assigned_by}} {{ task.created_at|date:'F j, Y' }}</span>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</section>
+
+{% endif %}
+
+
+
+   
+</div>
+{% endblock %}

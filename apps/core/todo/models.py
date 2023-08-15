@@ -47,15 +47,15 @@ class Task(models.Model): # task itself
     due_date = models.DateField()
     
     def __str__(self):
-        return f'{self.title} - {self.tenant}'
+        return f'{self.title}'
     
 class Assignment(models.Model):
     
     assigned_by = models.ForeignKey(StaffSeat, on_delete=models.CASCADE, related_name='assigned_by')
     task = models.ForeignKey('Task', on_delete=models.CASCADE)
-    assigned_to = models.ForeignKey(StaffSeat, on_delete=models.CASCADE, related_name='assigned_to')
+    assigned_to = models.ForeignKey(StaffSeat, on_delete=models.CASCADE, related_name='tasks')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return f'{self.task} - for {self.assigned_to} - assigned by {self.assigned_by}'
+        return f'{self.task}'
