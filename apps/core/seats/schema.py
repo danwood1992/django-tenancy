@@ -1,4 +1,5 @@
 import graphene
+from .queries import Query
 
 class Query(Query, graphene.ObjectType):
     pass

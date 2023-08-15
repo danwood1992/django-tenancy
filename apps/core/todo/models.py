@@ -13,7 +13,7 @@ class Group(models.Model): #group of tasks
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return f'{self.tenant} - {self.name} - {self.tenant}'
+        return f'{self.tenant} - {self.name}'
     
 class Category(models.Model): # task category
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)

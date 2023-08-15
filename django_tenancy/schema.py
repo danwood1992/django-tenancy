@@ -1,9 +1,14 @@
 import graphene
 import logging
 
-logger = logging.getLogger(__name__)
-class Query(graphene.ObjectType):
-    logging.info("Query class called")
-    hello = graphene.String(default_value="Hi!")
+from apps.core.todo.queries import Query as ToDoQueries
+from apps.core.todo.mutations import Mutation as ToDoMutations
 
-schema = graphene.Schema(query=Query)
+logger = logging.getLogger(__name__)
+class Query(ToDoQueries,graphene.ObjectType):
+    pass
+
+class Mutation(ToDoMutations,graphene.ObjectType):
+    pass
+
+schema = graphene.Schema(query=Query, mutation=Mutation)

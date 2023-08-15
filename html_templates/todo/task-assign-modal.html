@@ -9,6 +9,26 @@
             <div class="modal-body">
                 <form id="assignTaskForm">
                     <div class="mb-3">
+                        <label for="assignedById" class="form-label">Assigned By ID</label>
+                        <input type="number" class="form-control" id="assignedById" placeholder="Enter assigned by ID">
+                    </div>
+                    <div class="mb-3">
+                        <label for="assignedToId" class="form-label">Assigned To ID</label>
+                        <input type="number" class="form-control" id="assignedToId" placeholder="Enter assigned to ID">
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryId" class="form-label">Category ID</label>
+                        <input type="number" class="form-control" id="categoryId" placeholder="Enter category ID">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dueDate" class="form-label">Due Date</label>
+                        <input type="date" class="form-control" id="dueDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tenantId" class="form-label">Tenant ID</label>
+                        <input type="number" class="form-control" id="tenantId" placeholder="Enter tenant ID">
+                    </div>
+                    <div class="mb-3">
                         <label for="taskName" class="form-label">Task Name</label>
                         <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
                     </div>
@@ -16,7 +36,6 @@
                         <label for="taskDescription" class="form-label">Description</label>
                         <textarea class="form-control" id="taskDescription" rows="3" placeholder="Enter task description"></textarea>
                     </div>
-                    <!-- Add more fields if needed -->
                     <button type="submit" class="btn btn-primary">Assign Task</button>
                 </form>
             </div>
