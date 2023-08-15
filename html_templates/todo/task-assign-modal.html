@@ -10,7 +10,6 @@
                         <div class="modal-body">
                             <form id="assignTaskForm">
                                 <!-- tenant value-->
-                                <p>{{tenant}}{{tenant.id}}</p>
                                 <input type="hidden" id="tenantId" value="{{ tenant.id }}" />
                                 <!-- For staff_choice -->
                                 <div class="mb-3">
@@ -27,7 +26,7 @@
                                     <select class="form-control" id="assignedToId">
                                         {% for staff in staff_choice %}
                                            
-                                            <option value="{{ staff.id }}">{{ staff}}{{staff.id}}</option>
+                                            <option value="{{ staff.id }}">{{ staff}}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -44,7 +43,7 @@
                                     <select class="form-control" id="categoryId">
                                         {% for category in category_choice %}
             
-                                            <option value="{{ category.id }}">{{ category }} {{category.id}}</option>
+                                            <option value="{{ category.id }}">{{ category }} </option>
                                         {% endfor %}
                                     </select>
                                 </div>
