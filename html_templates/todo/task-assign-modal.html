@@ -8,34 +8,55 @@
             </div>
             <div class="modal-body">
                 <form id="assignTaskForm">
+                    
+                    <!-- tenant value-->
+                    <input type="hidden" id="tenantId" value="{{ tenant.id }}" />
+
+                    <!-- For staff_choice -->
                     <div class="mb-3">
-                        <label for="assignedById" class="form-label">Assigned By ID</label>
-                        <input type="number" class="form-control" id="assignedById" placeholder="Enter assigned by ID">
+                        <label for="assignedById" class="form-label">Assigned By</label>
+                        <select class="form-control" id="assignedById">
+                            {% for staff in staff_choice %}
+                                <option value="{{ staff.id }}">{{ staff}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
+                    <!-- For staff_choice -->
                     <div class="mb-3">
-                        <label for="assignedToId" class="form-label">Assigned To ID</label>
-                        <input type="number" class="form-control" id="assignedToId" placeholder="Enter assigned to ID">
+                        <label for="assignedToId" class="form-label">Assign To</label>
+                        <select class="form-control" id="assignedToId">
+                            {% for staff in staff_choice %}
+                                <option value="{{ staff.id }}">{{ staff}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
+
+                    <!-- For category_choice -->
                     <div class="mb-3">
-                        <label for="categoryId" class="form-label">Category ID</label>
-                        <input type="number" class="form-control" id="categoryId" placeholder="Enter category ID">
+                        <label for="categoryId" class="form-label">Category</label>
+                        <select class="form-control" id="categoryId">
+                            {% for category in category_choice %}
+                                <option value="{{ category }}">{{ category }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
+                    <!-- For due_date -->
                     <div class="mb-3">
                         <label for="dueDate" class="form-label">Due Date</label>
-                        <input type="date" class="form-control" id="dueDate">
+                        <input type="date" class="form-control" id="dueDate" name="dueDate">
                     </div>
-                    <div class="mb-3">
-                        <label for="tenantId" class="form-label">Tenant ID</label>
-                        <input type="number" class="form-control" id="tenantId" placeholder="Enter tenant ID">
-                    </div>
+
+                    <!-- Remaining fields... -->
                     <div class="mb-3">
                         <label for="taskName" class="form-label">Task Name</label>
                         <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
                     </div>
+
                     <div class="mb-3">
                         <label for="taskDescription" class="form-label">Description</label>
                         <textarea class="form-control" id="taskDescription" rows="3" placeholder="Enter task description"></textarea>
                     </div>
+
                     <button type="submit" class="btn btn-primary">Assign Task</button>
                 </form>
             </div>

@@ -29,7 +29,7 @@ tenant_patterns = [
                    
     ]
 
-api_patterns = [path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+api_patterns = [path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
     ]
 
 if settings.USE_DJANGO_TEMPLATES:

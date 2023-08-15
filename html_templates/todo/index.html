@@ -53,7 +53,77 @@
                 Assign Task
             </button>
         </div>
-        {% include 'todo/task-assign-modal.html' %}
+       
+        <!--MODAL-->
+            <!-- Assign Task Modal -->
+<div class="modal fade" id="assignTaskModal" tabindex="-1" aria-labelledby="assignTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="assignTaskModalLabel">Assign New Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="assignTaskForm">
+                    <!-- tenant value-->
+                    <p>{{tenant}}{{tenant.id}}</p>
+                    <input type="hidden" id="tenantId" value="{{ tenant.id }}" />
+                    <!-- For staff_choice -->
+                    <div class="mb-3">
+                        <label for="assignedById" class="form-label">Assigned By</label>
+                        <select class="form-control" id="assignedById">
+                            {% for staff in staff_choice %}
+                                <option value="{{ staff.id }}">{{ staff}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- For staff_choice -->
+                    <div class="mb-3">
+                        <label for="assignedToId" class="form-label">Assign To</label>
+                        <select class="form-control" id="assignedToId">
+                            {% for staff in staff_choice %}
+                               
+                                <option value="{{ staff.id }}">{{ staff}}{{staff.id}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                      <!-- For due_date -->
+                      <div class="mb-3">
+                        <label for="dueDate" class="form-label">Due Date</label>
+                        <input type="date" class="form-control" id="dueDate" name="dueDate">
+                    </div>
+
+
+                    <!-- For category_choice -->
+                    <div class="mb-3">
+                        <label for="categoryId" class="form-label">Category</label>
+                        <select class="form-control" id="categoryId">
+                            {% for category in category_choice %}
+
+                                <option value="{{ category.id }}">{{ category }} {{category.id}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Remaining fields... -->
+                    <div class="mb-3">
+                        <label for="taskName" class="form-label">Task Name</label>
+                        <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="taskDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="taskDescription" rows="3" placeholder="Enter task description"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Assign Task</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!--MODAL END-->
         
 
     <!-- Non-completed tasks -->
@@ -81,10 +151,84 @@
     </ul>
 </section>
 
+{% if user.is_authenticated %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the current date
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dueDate').setAttribute('min', today);
+        const tenantId = "{{ tenant.id }}";
+        
+        document.getElementById('assignTaskForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+        
+            // Collect form data
+            const assignedById = document.getElementById('assignedById').value;
+            const assignedToId = document.getElementById('assignedToId').value;
+            const categoryId = parseInt(document.getElementById('categoryId').value); // Parse as Int
+            const dueDate = document.getElementById('dueDate').value;
+            const title = document.getElementById('taskName').value;
+            const description = document.getElementById('taskDescription').value;
+        
+            // Construct GraphQL mutation using query and variables
+            const query = `
+                mutation AssignTask($assignedById: UUID!, $assignedToId: UUID!, $categoryId: Int!, $dueDate: Date, $tenantId: UUID!, $title: String!, $description: String!) {
+                    assignTask(
+                        assignedById: $assignedById,
+                        assignedToId: $assignedToId,
+                        categoryId: $categoryId,
+                        dueDate: $dueDate,
+                        tenantId: $tenantId,
+                        title: $title,
+                        description: $description
+                    ){
+                        task{
+                            id
+                        }
+                    }
+                }
+            `;
+         
+            const variables = {
+                assignedById,
+                assignedToId,
+                categoryId,
+                dueDate,
+                tenantId,
+                title,
+                description
+            };
+        
+            // Send the mutation request using Fetch API
+            fetch('/graphql/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    // Add any other necessary headers, like CSRF tokens or authentication headers
+                },
+                body: JSON.stringify({
+                    query: query,
+                    variables: variables
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error("Error sending GraphQL query:", error);
+            });
+        });
+    });
+</script>
+{% endif %}
 {% endif %}
 
-
-
-   
 </div>
 {% endblock %}
