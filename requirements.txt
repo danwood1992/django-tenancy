@@ -52,3 +52,5 @@ pycparser==2.21 # C parser in Python.
 six==1.16.0 # Python 2 and 3 compatibility library.
 txaio==23.1.1 # Compatibility API between asyncio/Twisted/Trollius.
 zope.interface==6.0 # Interfaces for Python.
+django-jazzmin==2.6.0 # A fresh and modern theme for Django Admin.
+
