@@ -1,3 +1,4 @@
+from typing import Iterable, Optional
 from django.db import models
 import uuid
 from apps.admin.tenancy.models.tenant import Tenant
@@ -23,7 +24,7 @@ class Category(models.Model): # task category
         return f'{self.tenant} - {self.name}'  
 class Reminder(models.Model): # task reminder
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
-    message = models.TextField()
+    message = models.TextField(default='You have a task due',null=True, blank=True)
     notify_at = models.DateTimeField()
     snooze = models.DateTimeField()
     assignment = models.ForeignKey('Assignment', on_delete=models.CASCADE)
@@ -57,4 +58,4 @@ class Assignment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return f'{self.task} - {self.assignee}'
+        return f'{self.task} - for {self.assigned_to} - assigned by {self.assigned_by}'

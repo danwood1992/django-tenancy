@@ -11,16 +11,16 @@
 </head>
 <body class=""> <!-- Assuming you wanted the Bootstrap "danger" red color. "bg-red" is not a standard class in Bootstrap 5 -->
 
-    {% include 'core/navbar.html' %}
+    {% include 'base/navbar.html' %}
 
-    {% include 'core/alerts.html' %}
+    {% include 'base/alerts.html' %}
 
     <main>
         {% block content %}
         {% endblock content %}
     </main>
 
-    {% include 'core/footer.html' %}
+    {% include 'base/footer.html' %}
 
     <!-- Optional Bootstrap JavaScript -->
     <!-- Popper.js first, then Bootstrap JS -->
