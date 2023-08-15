@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from django.conf import settings
 import logging
 from django.http import Http404, HttpResponseRedirect
-from apps.management.tenancy_management.models.domain import Domain
+from apps.admin.tenancy.models.domain import Domain
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
