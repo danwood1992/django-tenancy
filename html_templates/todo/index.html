@@ -219,7 +219,14 @@
                 return response.json();
             })
             .then(data => {
-                console.log(data);
+                if (data && data.data && data.data.assignTask) {
+                    // Maybe show a success message before reloading
+                    alert('Task assigned successfully!');
+                    location.reload();
+                } else {
+                    // Handle any errors from GraphQL
+                    console.error('Error assigning task:', data.errors);
+                }
             })
             .catch(error => {
                 console.error("Error sending GraphQL query:", error);
