@@ -11,15 +11,15 @@
                 <div class="col-md-6">
                     <div class="card rounded shadow mb-4">
                         <div class="card-header bg-dark text-white">
-                            Realm sign up  {% if user.is_authenticated %} As you already have an account use a diferent email! {% if user.staffseat_related %} {% endif%}{% endif %}
+                            Realm sign up 
                         </div>
                         <div class="card-body ">
-                            <form action="{% url 'home' %}" method="post">
+                            <form id ="realm-signup-form"action="/graphql/" method="post" >
                                 {% csrf_token %}
 
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Realm name<span class="small text-muted"> This must be lowercase with no spaces</span></label>
-                                    <input type="text" class="form-control" id="username" name="username" required>
+                                    <label for="realmName" class="form-label">Realm name<span class="small text-muted"> This must be lowercase with no spaces</span></label>
+                                    <input type="text" class="form-control" id="realmName" name="username" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
@@ -41,3 +41,52 @@
         </div>
  
 {% endblock %}
+
+{% block extrajs %}
+<script>
+    document.getElementById("realm-signup-form").addEventListener('submit', function(e) {
+        e.preventDefault();
+        const realmName = document.getElementById("realmName").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+    
+        const query = `
+            mutation {
+                createRealm(email: "${email}", password: "${password}", realmName: "${realmName}") {
+                    success
+                }
+            }
+        `;
+    
+        fetch('/graphql/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                // Add any other necessary headers, like CSRF tokens or authentication headers.
+            },
+            body: JSON.stringify({
+                query: query
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data && data.data && data.data.createRealm) {
+                // Handle success case
+                location.reload();
+            } else {
+                // Handle any errors from GraphQL
+                console.error('Error during realm creation:', data.errors);
+            }
+        })
+        .catch(error => {
+            console.error("Error sending GraphQL query:", error);
+        });
+    });
+    </script>
+{% endblock extrajs %}
