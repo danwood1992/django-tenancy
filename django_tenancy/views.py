@@ -37,10 +37,7 @@ class TenantInQuestionMixin:
         Logs the given message to the logging system.
         """
         logging.info(message)
-        
-
-
-
+    
 
 def login_view(request):
     if request.method == 'POST':
@@ -69,16 +66,19 @@ class BaseView(TemplateView):
         context = super().get_context_data(**kwargs)
         tenant = getattr(self.request, 'current_tenant', None)
         dev_mode = getattr(settings, 'DEV_MODE', 0)
-        context.update({
-            'tenant': tenant,
-            'staffseat': self.request.user.staffseat_related.filter(tenant=self.request.current_tenant).first(),
-            'paid_until': tenant.paid_until if tenant else None,
-            'dev_mode': dev_mode,
-            'management_domain': settings.MANAGEMENT_DOMAIN,
-            'user': self.request.user,
-            'superuser': self.request.user if self.request.user.is_superuser else None
-        })
+        context['tenant'] = tenant
+        try:
+            context['staffseat'] = self.request.user.staffseat_related.filter(tenant=self.request.current_tenant).first()
+        except:
+            context['staffseat'] = None
+        context['paid_until'] = tenant.paid_until if tenant else None
+        context['dev_mode'] = dev_mode
+        context['management_domain'] = settings.MANAGEMENT_DOMAIN
+        context['user'] = self.request.user
+        if self.request.user.is_superuser:
+            context['superuser'] = self.request.user
         return context
+    
 
 class HomeView(BaseView):
     template_name = 'index.html'
@@ -106,26 +106,6 @@ class NotPaidView(TenantInQuestionMixin, BaseView):
         context = super().get_context_data(**kwargs)
         self.logfunction(message = str("This view is - NotPaidView."))
         return context
-    
-class BaseView(TemplateView):
-    """
-    Base View for other views
-    """
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        tenant = getattr(self.request, 'current_tenant', None)
-        dev_mode = getattr(settings, 'DEV_MODE', 0)
-        context['tenant'] = tenant
-        context['staffseat'] = self.request.user.staffseat_related.filter(tenant=self.request.current_tenant).first()
-        context['paid_until'] = tenant.paid_until if tenant else None
-        context['dev_mode'] = dev_mode
-        context['management_domain'] = settings.MANAGEMENT_DOMAIN
-        context['user'] = self.request.user
-        if self.request.user.is_superuser:
-            context['superuser'] = self.request.user
-        return context
-    
 
 
 class HomeView(BaseView):
@@ -180,8 +160,7 @@ class SupportView(BaseView):
         return context
 
 
-    
-    
+ 
 class SignUpView(TenantInQuestionMixin, BaseView):
     template_name = 'signup.html'
     

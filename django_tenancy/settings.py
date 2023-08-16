@@ -174,6 +174,7 @@ NO_DOMAIN_REDIRECT = f'https://{MANAGEMENT_DOMAIN}/<tenant_in_question>/signup'
 
 FAILED_SUBSCRIPTION_CHECK = f'https://{MANAGEMENT_DOMAIN}/<tenant_in_question>/issues'
 
+TRIAL_LENGTH = 30 # days
 
 #logging for settings debug file in logs/server.log
 
