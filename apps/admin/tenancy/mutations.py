@@ -19,10 +19,10 @@ class CreateRealm(graphene.Mutation):
         
         realm_name = graphene.String(required=True)
         email = graphene.String(required=True)
-        password = graphene.String(required=True)
+        newrealmpassword = graphene.String(required=True)
 
     @transaction.atomic
-    def mutate(self, info, realm_name, email, password):
+    def mutate(self, info, realm_name, email, newrealmpassword):
         # First, get the objects needed for ForeignKeys
 
         current_realms = Tenant.objects.all()
@@ -40,8 +40,9 @@ class CreateRealm(graphene.Mutation):
         # Assign email a staffseast in the new realm
         #get or create user with that email address
         user = User.objects.create(username=email)
-        user.set_password(password)
-        user.save()  
+        user.set_password(newrealmpassword)
+        user.save()
+ 
         new_staff = StaffSeat(user=user, tenant=new_realm,tenant_management_level=5)
         new_staff.save()
 
