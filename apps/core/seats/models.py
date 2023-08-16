@@ -17,7 +17,7 @@ class AbstractSeat(models.Model):
     """
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
         related_name="%(class)s_related",
@@ -59,6 +59,6 @@ class StaffSeat(AbstractSeat):
         ]
 
     def __str__(self) -> str:
-        return getattr(self.user, 'username', 'No User')
+        return str(f'{self.user}' + ' - ' + f'({self.tenant})')
 
     
