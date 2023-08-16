@@ -22,20 +22,12 @@ class ToDoView(BaseView):
         - context (dict): A dictionary containing the context data for the view.
         """
         context = super(ToDoView, self).get_context_data(**kwargs)
-        try:
-            context['staffseat'] = self.request.user.staffseat_related.filter(tenant=self.request.current_tenant).first()
-        except:
-            context['staffseat'] = None
+        
         
         context['assignments'] = Assignment.objects.filter(assigned_to=context['staffseat']) # filters assignments by staffseat
+        context['staff_choice'] = StaffSeat.objects.filter(tenant=self.request.current_tenant)
+        context['category_choice'] = Category.objects.filter(tenant=self.request.current_tenant)
 
-        context['tenant'] = getattr(self.request, 'current_tenant', None)
-        context['staff_choice'] = StaffSeat.objects.filter(tenant=self.request.current_tenant)
-        context['category_choice'] = Category.objects.filter(tenant=self.request.current_tenant)
-    
-        context['staff_choice'] = StaffSeat.objects.filter(tenant=self.request.current_tenant)
-        context['category_choice'] = Category.objects.filter(tenant=self.request.current_tenant)
-    
         return context
     
     

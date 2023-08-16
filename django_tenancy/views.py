@@ -3,13 +3,12 @@ from typing import Any
 
 from django import http
 from django.conf import settings
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model, login, authenticate, logout
 from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from graphql_jwt.exceptions import JSONWebTokenError
 from graphql_jwt.shortcuts import get_token
-from django.contrib.auth import authenticate, login, logout
 from apps.admin.tenancy.models.domain import Domain
 
 User = get_user_model()
@@ -61,6 +60,58 @@ def logout_view(request):
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Unsupported method'})
 
+class BaseView(TemplateView):
+    """
+    Base View for other views
+    """
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tenant = getattr(self.request, 'current_tenant', None)
+        dev_mode = getattr(settings, 'DEV_MODE', 0)
+        context.update({
+            'tenant': tenant,
+            'staffseat': self.request.user.staffseat_related.filter(tenant=self.request.current_tenant).first(),
+            'paid_until': tenant.paid_until if tenant else None,
+            'dev_mode': dev_mode,
+            'management_domain': settings.MANAGEMENT_DOMAIN,
+            'user': self.request.user,
+            'superuser': self.request.user if self.request.user.is_superuser else None
+        })
+        return context
+
+class HomeView(BaseView):
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tenant_domains'] = Domain.objects.all()
+        return context
+        
+    def get_template_names(self):
+        tenant = getattr(self.request, 'current_tenant', None)
+        if tenant and tenant.management_tenant:
+            return ['management/index.html']
+        return super().get_template_names()
+        
+        
+class ContactView(BaseView):
+    template_name = 'contact/index.html'
+
+
+class NotPaidView(TenantInQuestionMixin, BaseView):
+    template_name = 'not_paid.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.logfunction(message = str("This view is - NotPaidView."))
+        return context
+    
+class IssuesView(BaseView):
+    """
+    View only for management domain .
+    """
+
 
 
 
@@ -69,20 +120,18 @@ class BaseView(TemplateView):
     Base View for other views
     """
 
-   
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         tenant = getattr(self.request, 'current_tenant', None)
         dev_mode = getattr(settings, 'DEV_MODE', 0)
         context['tenant'] = tenant
+        context['staffseat'] = self.request.user.staffseat_related.filter(tenant=self.request.current_tenant).first()
         context['paid_until'] = tenant.paid_until if tenant else None
         context['dev_mode'] = dev_mode
         context['management_domain'] = settings.MANAGEMENT_DOMAIN
         context['user'] = self.request.user
         if self.request.user.is_superuser:
             context['superuser'] = self.request.user
-       
         return context
     
 
