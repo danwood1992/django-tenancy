@@ -107,14 +107,6 @@ class NotPaidView(TenantInQuestionMixin, BaseView):
         self.logfunction(message = str("This view is - NotPaidView."))
         return context
     
-class IssuesView(BaseView):
-    """
-    View only for management domain .
-    """
-
-
-
-
 class BaseView(TemplateView):
     """
     Base View for other views
@@ -172,23 +164,7 @@ class IssuesView(BaseView):
     """
     template_name = 'issues/index.html'
     
-    def get(self, request, *args, **kwargs):
-        tenant = getattr(request, 'current_tenant', None)
-        page = 'issues'
-        
-      
-        if not tenant or not tenant.management_tenant: #change logic to do 
-            logger.info(f"{request.get_host()} Attempting to access issues page from own domain. Redirecting to management domain")
-            # Redirect to the management domain's issues page if tenant is not a management tenant
-            return HttpResponseRedirect(f"https://{settings.MANAGEMENT_DOMAIN}/{page}")
-        return super(IssuesView, self).get(request, *args, **kwargs)
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        
-        return context
-    
-    
+  
 class SupportView(BaseView):
     """
     View only for management domain .
@@ -202,19 +178,7 @@ class SupportView(BaseView):
         context = super().get_context_data(**kwargs)
         # context['teamName'] = self.kwargs['teamName']
         return context
-    
-    def get(self, request, *args, **kwargs):
-        tenant = getattr(request, 'current_tenant', None)
-        page = 'support'
-        
-      
-        if not tenant or not tenant.management_tenant:
-            logger.info(f"{request.get_host()} Attempting to access issues page from own domain. Redirecting to management domain")
-            # Redirect to the management domain's issues page if tenant is not a management tenant
-            
-            return HttpResponseRedirect(f"https://{settings.MANAGEMENT_DOMAIN}/{page}")
-        
-        return super().get(request, *args, **kwargs)
+
 
     
     
