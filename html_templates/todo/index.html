@@ -8,8 +8,8 @@
 <div class="container my-5">
 
     <header class="text-center mb-5">
-        <h1 class="display-4">Welcome to the Realms To-Do app</h1>
-        <p class="lead">Streamline your projects with the most intuitive task management tool.</p>
+        <h1 class="display-4">Welcome to the To-Do app</h1>
+        <p class="lead">Easy to use with No faff.</p>
     </header>
 
     {% if not user.is_authenticated %}
@@ -38,8 +38,9 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <h3>Techstack in Full swing</h3>
-                <p>This simple to do app is designed to showcase the speed and versatiltiy of graphql and websockets</p>
+                <h3>Dev note</h3>
+                <p>This simple to do app is designed to showcase the speed and versatiltiy of graphql alongside JS and CSS.</p>
+                <p> Right click and inspect to see the code. To see the backend look at our source code on github.</p>
                 <p>Design your apps how you wish, this will provide you with a working foundation.</p>
             </div>
         </div>
@@ -57,32 +58,104 @@
     {% include 'todo/task-assign-modal.html' %}
 
 
-    <!-- Non-completed tasks -->
-    <h5 class="mt-3">Pending</h5>
-    <ul style="list-style-type: none;">
-    {% for task in assignments %}
-        {% if not task.task.completed %}
-            <li>
-                {{ task }} <span class="text-muted">- Assigned by {{task.assigned_by}} {{ task.created_at|date:'F j, Y' }}</span>
-            </li>
-        {% endif %}
-    {% endfor %}
-    </ul>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <!-- Completed tasks -->
-    <h5 class="mt-3">Completed</h5>
-    <ul style="list-style-type: none;">
-    {% for task in assignments %}
-        {% if task.task.completed %}
-            <li>
-                <span class="text-decoration-line-through">{{ task }}</span> <span class="text-muted">- Assigned by {{task.assigned_by}} {{ task.created_at|date:'F j, Y' }}</span>
-            </li>
-        {% endif %}
-    {% endfor %}
-    </ul>
+<!-- Non-completed tasks -->
+<section class="mb-4 ">
+    <h5 class="mt-3 mb-4">Pending</h5>
+    <div id="pendingTasks">
+        {% for task in assignments %}
+            {% if not task.task.completed %}
+            <div class="card mb-2 shadow">
+                <div class="card-body">
+                    <h6 class="card-title">{{ task }} <span class="text-muted small">- Assigned by {{task.assigned_by}} {{ task.created_at|date:'F j' }}</span></h6>
+                    <button class="btn btn-success btn-sm" data-id="{{task.task.id}}" onclick="completeTask(this)">
+                        <i class="fas fa-check"></i> Done
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 </section>
 
+<!-- Completed tasks -->
+<section class="mb-4">
+    <h5 class="mt-3 mb-4">Completed</h5>
+    <div id="completedTasks">
+        {% for task in assignments %}
+            {% if task.task.completed %}
+            <div class="card mb-2 bg-light">
+                <div class="card-body">
+                    <h6 class="card-title text-decoration-line-through">
+                        {{ task }} <span class="text-muted small">- Assigned by {{task.assigned_by}} {{ task.created_at|date:'F j, Y' }}</span>
+                    </h6>
+                    <button class="btn btn-outline-dark btn-sm" data-id="{{task.task.id}}" onclick="completeTask(this)">
+                        <i class="fas fa-undo"></i> Undo Completion
+                    </button>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+
+</section>
+
+
 {% if user.is_authenticated %}
+<script>
+    async function completeTask(buttonElement) {
+        const taskId = buttonElement.getAttribute('data-id');
+        // Here we're changing from 'li' to 'div.card'
+        const cardItem = buttonElement.closest('div.card');
+        const pendingList = document.querySelector('#pendingTasks');
+        const completedList = document.querySelector('#completedTasks');
+    
+        const query = `
+            mutation CompleteTask {
+                taskCompletion(taskId: "${taskId}") {
+                    task {
+                        id
+                        completed
+                    }
+                }
+            }
+        `;
+    
+        try {
+            const response = await fetch('/graphql/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ query: query }),
+            });
+    
+            const data = await response.json();
+    
+            if (data.data && data.data.taskCompletion) {
+                const cardTitle = cardItem.querySelector('.card-title');  // Target the card title
+            
+                if (data.data.taskCompletion.task.completed) {
+                    completedList.appendChild(cardItem);
+                    cardTitle.classList.add('text-decoration-line-through');  // Add crossed through line
+                    buttonElement.innerHTML = '<i class="fas fa-undo"></i> Undo Completion';
+                } else {
+                    pendingList.appendChild(cardItem);
+                    cardTitle.classList.remove('text-decoration-line-through');  // Remove crossed through line
+                    buttonElement.innerHTML = '<i class="fas fa-check"></i> Done';
+                }
+            } else {
+                alert('Failed to update the task.');
+            }
+        } catch (error) {
+            console.error('Error updating the task:', error);
+        }
+    }
+    
+    </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Get the current date

@@ -59,6 +59,6 @@ class StaffSeat(AbstractSeat):
         ]
 
     def __str__(self) -> str:
-        return str(f'{self.user}' + ' - ' + f'({self.tenant})')
+        return str(f'{self.user}')
 
     
