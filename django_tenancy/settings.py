@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'apps.admin.tenancy',
     'apps.core.seats',
     'apps.core.todo',
+    'apps.core.timeline',
+    
 ]
 
 MIDDLEWARE = [
