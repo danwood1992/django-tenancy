@@ -16,7 +16,7 @@
     <div class="alert alert-warning d-flex align-items-center" role="alert">
         <i class="bi bi-exclamation-triangle-fill me-3"></i>
         <div>
-            You're currently not signed in. <a href="https://{{management_domain}}/issues" class="alert-link">Click here</a> to log in and manage your tasks.
+            You're currently not signed in. <a data-bs-toggle="modal"data-bs-target="#loginModal" href="https://{{management_domain}}/issues" class="alert-link">Click here</a> to log in and manage your tasks.
         </div>
     </div>
     {% endif %}
