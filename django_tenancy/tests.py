@@ -1,7 +1,7 @@
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
 from django.conf import settings
-from apps.admin.tenancy.models.domain import Domain
+from apps.admin.realms.models.domain import Domain
 from .views import HomeView, ContactView, NotPaidView, IssuesView, SupportView
 
 

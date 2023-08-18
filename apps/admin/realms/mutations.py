@@ -10,7 +10,7 @@ from graphene import ObjectType
 
 from .models import Realm, RealmAccess, RealmProfile
 
-from .types import DomainType, RealmtType
+from .types import RealmtType, RealmAccessType, RealmProfileType
 
 class AuthMutation(graphene.ObjectType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()

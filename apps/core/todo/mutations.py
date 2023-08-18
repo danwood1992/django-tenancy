@@ -4,7 +4,7 @@ from .models import Task, Assignment, Group, Category, Reminder
 from .types import TaskType, AssignmentType, GroupType, CategoryType, ReminderType
 from apps.core.seats.models import StaffSeat
 from apps.core.seats.types import StaffType
-from apps.admin.tenancy.models.models import Tenant
+from apps.admin.realms.models.models import Tenant
 
 # I have commented heavily for an easier time creating a new mutation 
 

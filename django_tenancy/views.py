@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from graphql_jwt.exceptions import JSONWebTokenError
 from graphql_jwt.shortcuts import get_token
-from apps.admin.tenancy.models.domain import Domain
+from apps.admin.realms.models.domain import Domain
 
 User = get_user_model()
 

@@ -49,8 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
-    'apps.admin.tenancy',
-    'apps.core.seats',
+    'apps.admin.realms',
     'apps.core.todo',
     'apps.core.timeline',
     
@@ -168,23 +167,14 @@ MANAGEMENT_DOMAIN = os.environ.get('MANAGEMENT_DOMAIN', 'fusehub.imperisoft.co.u
 
 USE_DJANGO_TEMPLATES = True
 
-NO_MANAGEMENT_TENANT_REDIRECT = 'https://github.com/danwood1992/django-tenancy'
-
-NO_DOMAIN_REDIRECT = f'https://{MANAGEMENT_DOMAIN}/<tenant_in_question>/signup'
-
-FAILED_SUBSCRIPTION_CHECK = f'https://{MANAGEMENT_DOMAIN}/<tenant_in_question>/issues'
-
 TRIAL_LENGTH = 30 # days
 
 #logging for settings debug file in logs/server.log
 
 logger = logging.getLogger(__name__)
-logger.info(f"------------ Tenancy configuration ----------------")
+logger.info(f"------------ Realm configuration ----------------")
 logger.info(f" Management domain - https://{MANAGEMENT_DOMAIN} ")
-logger.info(f" No management tenant redirect - {NO_MANAGEMENT_TENANT_REDIRECT} ")
-logger.info(f" No domain redirect - {NO_DOMAIN_REDIRECT} ")
-logger.info(f" Failed subscription check - {FAILED_SUBSCRIPTION_CHECK} ")
-logger.info(f"-----------------------------------------------------")
+logger.info(f"-------------------------------------------------")
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)

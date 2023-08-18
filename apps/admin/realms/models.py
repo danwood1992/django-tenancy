@@ -10,12 +10,12 @@ logger = logging.getLogger(__name__)
 class Realm(models.Model):
   
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    name = models.CharField(max_length=100, unique=True)
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     on_trial = models.BooleanField(default=True)
     management_tenant = models.BooleanField(default=False)
     paid_until = models.DateField(null=True, blank=True)
-    name = models.CharField(max_length=100, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
@@ -33,9 +33,9 @@ class RealmAccess(models.Model):
     def __str__(self) -> str:
         return self.realm.name
     
-class RealmProfile(models.Model):
+class RealmAccount(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    realm_access = models.ForeignKey(RealmAccess, on_delete=models.CASCADE)
+    realm_access = models.OneToOneField(RealmAccess, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     job_title = models.CharField(max_length=100, null=True, blank=True)
