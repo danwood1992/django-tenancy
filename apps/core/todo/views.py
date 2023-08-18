@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django_tenancy.views import BaseView
-from apps.core.seats.models import StaffSeat
+from apps.admin.realms.models import RealmAccount
 from .models import Category, Task, Assignment
 
 class ToDoView(BaseView):
@@ -22,10 +22,8 @@ class ToDoView(BaseView):
         - context (dict): A dictionary containing the context data for the view.
         """
         context = super(ToDoView, self).get_context_data(**kwargs)
-        
-        
         context['assignments'] = Assignment.objects.filter(assigned_to=context['staffseat']) # filters assignments by staffseat
-        context['staff_choice'] = StaffSeat.objects.filter(tenant=self.request.current_tenant)
+        context['staff_choice'] = RealmAccount.objects.filter()
         context['category_choice'] = Category.objects.filter(tenant=self.request.current_tenant)
 
         return context

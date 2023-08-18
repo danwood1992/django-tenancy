@@ -34,9 +34,8 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const loginError = document.getElementById('loginError');
-            // Get CSRF token from the form
             const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            // Traditional Django Login
+            
             const djangoLoginResponse = await fetch('/login/', {
                 method: 'POST',
                 headers: {
@@ -45,15 +44,19 @@
                 },
                 body: `username=${username}&password=${password}`
             });
-        
+            
             const djangoResult = await djangoLoginResponse.json();
-        
+            
             if (djangoResult.status !== 'success') {
                 loginError.innerText = djangoResult.message || 'Error logging in.';
-                return; // Exit if traditional login failed.
+                return;
+            } else if (djangoResult.dashboard_url) {
+                // Redirect to the provided dashboard URL and exit
+                window.location.href = djangoResult.dashboard_url;
+                return;
             }
         
-            // GraphQL JWT Authentication (assuming you have the endpoint and mutation setup)
+            // GraphQL JWT Authentication 
             const query = `
                 mutation {
                     tokenAuth(username: "${username}", password: "${password}") {
@@ -70,18 +73,16 @@
                 },
                 body: JSON.stringify({ query: query }),
             });
-        
+            
             const jwtResult = await jwtResponse.json();
-        
+            
             if (jwtResult.data && jwtResult.data.tokenAuth && jwtResult.data.tokenAuth.token) {
                 localStorage.setItem('authToken', jwtResult.data.tokenAuth.token);
-                location.reload(); // Or any other action you'd like to take after successful login.
+                location.reload();
             } else {
                 loginError.innerText = 'Error getting JWT token.';
             }
         }
-        
-
     </script>
     {% else %}
     <script>

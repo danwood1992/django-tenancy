@@ -35,7 +35,7 @@ class RealmAccess(models.Model):
     
 class RealmAccount(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    realm_access = models.OneToOneField(RealmAccess, on_delete=models.CASCADE)
+    realm_access = models.OneToOneField(RealmAccess, on_delete=models.CASCADE, related_name='realm_account')
     first_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     job_title = models.CharField(max_length=100, null=True, blank=True)
