@@ -37,7 +37,7 @@ class Reminder(models.Model): # task reminder
     
 class Task(models.Model): # task itself
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    Realm = models.ForeignKey(Realm, on_delete=models.CASCADE)
+    realm = models.ForeignKey(Realm, on_delete=models.CASCADE)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=500, null=True, blank=True)

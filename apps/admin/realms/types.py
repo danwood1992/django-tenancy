@@ -1,8 +1,8 @@
 from graphene_django import DjangoObjectType
-from .models import Realm, RealmAccess, RealmProfile
+from .models import Realm, RealmAccess, RealmAccount
 
 
-class RealmtType(DjangoObjectType):
+class RealmType(DjangoObjectType):
     class Meta:
         model = Realm
         fields = "__all__"
@@ -11,7 +11,7 @@ class RealmAccessType(DjangoObjectType):
     class Meta:
         model = RealmAccess
         fields = "__all__"
-class RealmProfileType(DjangoObjectType):
+class RealmAccountType(DjangoObjectType):
     class Meta:
-        model = RealmProfile
+        model = RealmAccount
         fields = "__all__"

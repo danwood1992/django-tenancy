@@ -56,7 +56,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'apps.admin.tenancy.middleware.domainrequest.DomainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
