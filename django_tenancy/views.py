@@ -65,14 +65,12 @@ class BaseView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         tenant = getattr(self.request, 'current_tenant', None)
-        dev_mode = getattr(settings, 'DEV_MODE', 0)
         context['tenant'] = tenant
         try:
             context['staffseat'] = self.request.user.staffseat_related.filter(tenant=self.request.current_tenant).first()
         except:
             context['staffseat'] = None
         context['paid_until'] = tenant.paid_until if tenant else None
-        context['dev_mode'] = dev_mode
         context['management_domain'] = settings.MANAGEMENT_DOMAIN
         context['user'] = self.request.user
         if self.request.user.is_superuser:

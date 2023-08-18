@@ -5,10 +5,10 @@ gunicorn==20.1.0 # A WSGI HTTP server.
 
 # GraphQL Libraries:
 graphene==3.2.2 # A library for building GraphQL APIs in Python.
-graphene-django==3.1.2 # Integrate Django with Graphene.
+graphene-django==3.1.5 # Integrate Django with Graphene.
 graphql-core==3.2.3 # Core functionalities for GraphQL in Python.
 graphql-relay==3.2.0 # Relay specific functionalities for GraphQL.
-django-channels-graphql-ws
+
 
 # Utilities for GraphQL:
 aniso8601==9.0.1 # A library for parsing ISO 8601 formatted strings, used by GraphQL.

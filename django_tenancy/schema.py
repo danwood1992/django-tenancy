@@ -14,4 +14,6 @@ class Query(ToDoQueries,graphene.ObjectType):
 class Mutation(TenancyMutations,SeatsMutations,ToDoMutations,graphene.ObjectType):
     pass
 
-schema = graphene.Schema(query=Query, mutation=Mutation)
+
+
+schema = graphene.Schema(query=Query, mutation=Mutation )

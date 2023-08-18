@@ -19,8 +19,6 @@ logging.basicConfig(
 
 DEBUG = os.environ.get('DEBUG', 0)
 
-DEV_MODE = os.environ.get('DEV_MODE', 0)
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get(
