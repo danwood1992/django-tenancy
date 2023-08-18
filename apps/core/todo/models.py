@@ -1,7 +1,7 @@
 from typing import Iterable, Optional
 from django.db import models
 import uuid
-from apps.admin.tenancy.models.tenant import Tenant
+from apps.admin.tenancy.models.models import Tenant
 from apps.core.seats.models import StaffSeat
 
 class Group(models.Model): #group of tasks

@@ -16,28 +16,6 @@ User = get_user_model()
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-class TenantInQuestionMixin:
-    """
-    Mixin class for views that require tenant_in_question context variable.
-    The tenant_in_question is in the url of an inactive, unpaid or nonexistent tenant but has its domain pointing to the server.. 
-    Youc can remove this mixin if you don't need the tenant_in_question context variable. Remember to remove it from the urls.py as well.
-    """
-    
-    def get_context_data(self, **kwargs):
-        """
-        Returns the context data for the view, including the tenant_in_question variable.
-        """
-        context = super().get_context_data(**kwargs)
-        context['tenant_in_question'] = self.kwargs.get('tenant_in_question')
-        logging.info(f"Tenant in question - {context['tenant_in_question']}")
-        return context
-    
-    def logfunction(self, message):
-        """
-        Logs the given message to the logging system.
-        """
-        logging.info(message)
-    
 
 def login_view(request):
     if request.method == 'POST':
@@ -64,19 +42,21 @@ class BaseView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        tenant = getattr(self.request, 'current_tenant', None)
-        context['tenant'] = tenant
-        try:
-            context['staffseat'] = self.request.user.staffseat_related.filter(tenant=self.request.current_tenant).first()
-        except:
-            context['staffseat'] = None
-        context['paid_until'] = tenant.paid_until if tenant else None
-        context['management_domain'] = settings.MANAGEMENT_DOMAIN
         context['user'] = self.request.user
-        if self.request.user.is_superuser:
-            context['superuser'] = self.request.user
+        context['management_domain'] = settings.MANAGEMENT_DOMAIN
+     
         return context
     
+class HomeView(BaseView):
+    template_name = 'management/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tenant_domains'] = Domain.objects.all()
+        return context
+        
+class ContactView(BaseView):
+    template_name = 'contact/index.html'
 
 class HomeView(BaseView):
     template_name = 'index.html'
@@ -96,43 +76,6 @@ class HomeView(BaseView):
 class ContactView(BaseView):
     template_name = 'contact/index.html'
 
-
-class NotPaidView(TenantInQuestionMixin, BaseView):
-    template_name = 'not_paid.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        self.logfunction(message = str("This view is - NotPaidView."))
-        return context
-
-
-class HomeView(BaseView):
-    template_name = 'index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tenant_domains'] = Domain.objects.all()
-        return context
-        
-    def get_template_names(self):
-        tenant = getattr(self.request, 'current_tenant', None)
-        if tenant and tenant.management_tenant:
-            return ['management/index.html']
-        return super().get_template_names()
-        
-        
-class ContactView(BaseView):
-    template_name = 'contact/index.html'
-
-
-class NotPaidView(TenantInQuestionMixin, BaseView):
-    template_name = 'not_paid.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        self.logfunction(message = str("This view is - NotPaidView."))
-        return context
-    
 class IssuesView(BaseView):
     """
     View only for management domain .
@@ -142,7 +85,6 @@ class IssuesView(BaseView):
     """
     template_name = 'issues/index.html'
     
-  
 class SupportView(BaseView):
     """
     View only for management domain .
@@ -151,26 +93,11 @@ class SupportView(BaseView):
         A log will be made in the log file.
     """
     template_name = 'issues/support/index.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # context['teamName'] = self.kwargs['teamName']
-        return context
 
-
- 
-class SignUpView(TenantInQuestionMixin, BaseView):
+class SignUpView(BaseView):
     template_name = 'signup.html'
     
-    def get_context_data(self, **kwargs):
-        
-        return super().get_context_data(**kwargs)
-        
-    def get_template_names(self):
-        tenant = getattr(self.request, 'current_tenant', None)
-        if tenant and tenant.management_tenant:
-            return ['management/signup/index.html']
-        return super().get_template_names()
+class UnpaidRealmView(BaseView):
+    template_name = 'not_paid.html'
     
-
-    
+  

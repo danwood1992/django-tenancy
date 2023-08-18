@@ -4,7 +4,7 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.http import HttpResponseNotFound
-from ..models.tenant import Tenant
+from ..models.models import Tenant
 from ..models.domain import Domain
 from ..utils import get_host_from_request , tenant_subscription_check
 from datetime import date

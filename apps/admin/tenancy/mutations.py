@@ -1,18 +1,25 @@
-import graphene
-from graphene import ObjectType
-from .models.domain import Domain
-from .types import DomainType, RealmtType
-from apps.core.seats.models import StaffSeat
-from apps.core.seats.types import StaffType
-from apps.admin.tenancy.models.tenant import Tenant
-from django.db import transaction
 import datetime
+
+import graphene
+import graphql_jwt
+
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.db import transaction
+from graphene import ObjectType
+
+from .models import Realm, RealmAccess, RealmProfile
+
+from .types import DomainType, RealmtType
+
+class AuthMutation(graphene.ObjectType):
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+    verify_token = graphql_jwt.Verify.Field()
+    refresh_token = graphql_jwt.Refresh.Field()
+    
 
 class CreateRealm(graphene.Mutation):
     realm = graphene.Field(RealmtType)
-    domain = graphene.Field(DomainType)
     success = graphene.Boolean()
     
     class Arguments:
@@ -24,31 +31,26 @@ class CreateRealm(graphene.Mutation):
     @transaction.atomic
     def mutate(self, info, realm_name, email, newrealmpassword):
         # First, get the objects needed for ForeignKeys
-
-        current_realms = Tenant.objects.all()
-        current_domains = Domain.objects.all()
+        current_realms = Realm.objects.all()
+       
         trial_end = datetime.date.today() + datetime.timedelta(days=settings.TRIAL_LENGTH)
         management_domain = settings.MANAGEMENT_DOMAIN
         # Create the realm
-        if realm_name in [realm.name for realm in current_realms] or f'{realm_name}.{management_domain}' in [domain.domain_name for domain in current_domains]:
+        if realm_name in [realm.name for realm in current_realms]:
             raise Exception('Realm name already exists')
-        new_realm = Tenant(name=realm_name,paid_until=trial_end)
+        new_realm = Realm(name=realm_name,paid_until=trial_end)
         new_realm.save()
-        domain = Domain(domain_name=f'{realm_name}.{management_domain}', tenant=new_realm)
-        domain.save()
-        
         # Assign email a staffseast in the new realm
         #get or create user with that email address
         user = User.objects.create(username=email)
         user.set_password(newrealmpassword)
         user.save()
  
-        new_staff = StaffSeat(user=user, tenant=new_realm,tenant_management_level=5)
-        new_staff.save()
+        realm_access = RealmAccess(user=user, realm=new_realm,tenant_management_level=5)
+        realm_access.save()
 
-        return CreateRealm(success=True, realm=new_realm, domain=domain)
+        return CreateRealm(success=True, realm=new_realm)
    
 
-class Mutation(ObjectType):
-    create_realm = CreateRealm.Field()
-
+class Mutation(AuthMutation,CreateRealm, graphene.ObjectType):
+    pass

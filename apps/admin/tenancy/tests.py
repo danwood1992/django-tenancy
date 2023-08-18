@@ -1,6 +1,6 @@
 from django.test import TestCase
 from datetime import datetime, timedelta
-from .models.tenant import Tenant
+from .models.models import Tenant
 from .models.domain import Domain
 
 class TenantModelTest(TestCase):

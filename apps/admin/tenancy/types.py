@@ -1,12 +1,17 @@
 from graphene_django import DjangoObjectType
-from .models.tenant import Tenant
-from .models.domain import Domain
+from .models import Realm, RealmAccess, RealmProfile
+
 
 class RealmtType(DjangoObjectType):
     class Meta:
-        model = Tenant
+        model = Realm
         fields = "__all__"
-class DomainType(DjangoObjectType):
+
+class RealmAccessType(DjangoObjectType):
     class Meta:
-        model = Domain
+        model = RealmAccess
+        fields = "__all__"
+class RealmProfileType(DjangoObjectType):
+    class Meta:
+        model = RealmProfile
         fields = "__all__"
