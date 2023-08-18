@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from graphene import ObjectType
 
-from .models import Realm, RealmAccess, RealmProfile
+from .models import Realm, RealmAccess, RealmAccount
 
 from .types import RealmtType, RealmAccessType, RealmProfileType
 
@@ -47,6 +47,8 @@ class CreateRealm(graphene.Mutation):
         user.save()
  
         realm_access = RealmAccess(user=user, realm=new_realm,tenant_management_level=5)
+        realm_account = RealmAccount(realm_access=realm_access, first_name='Admin', last_name='User', job_title='CEO')
+        realm_account.save()
         realm_access.save()
 
         return CreateRealm(success=True, realm=new_realm)

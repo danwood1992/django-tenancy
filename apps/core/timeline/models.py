@@ -1,8 +1,8 @@
 from django.db import models
-from apps.core.seats.models import StaffSeat
+from apps.admin.realms.models import RealmAccount
 
 class Post(models.Model):
-    author = models.ForeignKey(StaffSeat, on_delete=models.CASCADE)
+    author = models.ForeignKey(RealmAccount, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_active   = models.BooleanField(default=True)
@@ -10,7 +10,7 @@ class Post(models.Model):
     def __str__(self):
         return self.content
 class Comment(models.Model):
-    author = models.ForeignKey(StaffSeat, on_delete=models.CASCADE)
+    author = models.ForeignKey(RealmAccount, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -19,7 +19,7 @@ class Comment(models.Model):
         return self.content
 
 class Like(models.Model):
-    author = models.ForeignKey(StaffSeat, on_delete=models.CASCADE)
+    author = models.ForeignKey(RealmAccount, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
