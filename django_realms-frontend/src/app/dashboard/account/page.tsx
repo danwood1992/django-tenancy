@@ -1,16 +1,13 @@
-import Title from './title'
-import Stats from './stats'
 import { type Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Dashboard',
 }
 
-export default function Dashboard() {
+export default function Account() {
   return (
       <div>
-      
-      <Stats />
+      <h1>Account section</h1>
       </div>
   )
 }

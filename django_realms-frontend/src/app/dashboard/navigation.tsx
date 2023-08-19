@@ -1,18 +1,5 @@
-"use client";
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+"use client"
+import { DiDjango,DiReact} from "react-icons/di";
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
@@ -26,14 +13,22 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  FingerPrintIcon,
+  SquaresPlusIcon,
+  KeyIcon,
+  LockClosedIcon,
+  LockOpenIcon,
+  SparklesIcon
+
+  
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
+  { name: 'Dashboard', href: '/dashboard/', icon: HomeIcon, current: true },
+  { name: 'Tasks', href: '/dashboard/tasks/', icon: UsersIcon, current: false },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
+  { name: 'Calendar', href: '/dashboard/calender/', icon: CalendarIcon, current: false },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
   { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
 ]
@@ -45,25 +40,20 @@ const teams = [
 const userNavigation = [
   { name: 'Your profile', href: '#' },
   { name: 'Sign out', href: '#' },
+  { name: 'Account', href: 'dashboard/account' },
+
 ]
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Navigation() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
     <>
-      {/*
-        This example requires updating your template:
 
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
@@ -280,6 +270,19 @@ export default function Example() {
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
+              
+                <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+                  <span className="sr-only">All apps</span>
+                  <DiReact className="h-6 w-6" aria-hidden="true" />
+                </button>
+                <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+                  <span className="sr-only">Sparkles</span>
+                  <DiDjango className="h-10 w-10" aria-hidden="true" />
+                </button>
+                <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+                  <span className="sr-only">Security</span>
+                  <KeyIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
 
                 {/* Separator */}
                 <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true" />
@@ -290,12 +293,12 @@ export default function Example() {
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="h-8 w-8 rounded-full bg-gray-50"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src="https://avatars.githubusercontent.com/u/109208162?s=96&v=4"
                       alt=""
                     />
                     <span className="hidden lg:flex lg:items-center">
                       <span className="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">
-                        Tom Cook
+                        Daniel wood
                       </span>
                       <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                     </span>
@@ -332,11 +335,9 @@ export default function Example() {
             </div>
           </div>
 
-          <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">{/* Your content */}</div>
-          </main>
-        </div>
+          </div>
       </div>
     </>
+       
   )
 }
