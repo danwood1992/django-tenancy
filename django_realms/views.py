@@ -26,7 +26,7 @@ def login_view(request):
             login(request, user)
             # Get the primary realm_id for this user
             try:
-                primary_realm_access = RealmAccess.objects.get(user=user, primary=True)
+                primary_realm_access = RealmAccess.objects.get(user=user, is_primary=True)
                 realm_id = primary_realm_access.realm.id
                 dashboard_url = reverse('dashboard_view', args=[realm_id])
                 return JsonResponse({'status': 'success', 'dashboard_url': dashboard_url})
@@ -55,10 +55,14 @@ class BaseView(TemplateView):
         context['management_domain'] = settings.MANAGEMENT_DOMAIN
         
         pagetype = self.pagetype
-        
+        if  self.request.user.is_authenticated:
+            print("User is authenticated")
+            realms_can_access = RealmAccess.objects.filter(user=self.request.user)
+            context['realms_can_access'] = realms_can_access
         if pagetype != 'public':
             # Get the UUID from the URL parameters
-            realm_id = kwargs.get('realm_id')
+            realm_id = kwargs.get('realmid')
+            
             if realm_id:
                 try:
                     realm = Realm.objects.get(pk=realm_id)
@@ -87,9 +91,6 @@ class ContactView(BaseView):
 
 class DashboardView(BaseView):
     template_name = 'dashboard/index.html'
-
-class ContactView(BaseView):
-    template_name = 'contact/index.html'
 
 class IssuesView(BaseView):
     """

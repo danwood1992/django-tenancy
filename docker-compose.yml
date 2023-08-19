@@ -1,13 +1,13 @@
 
 services:
-  django-tenancy-backend:
+  django_realms-backend:
     build:
       context: .
       dockerfile: ./compose/dev/backend/Dockerfile
-    image: django-tenancy-backend
+    image: django_realms-backend
     command: /start
     volumes:
-      - .:/opt/django-tenancy
+      - .:/opt/django_realms
     ports:
       - "8000:8000"
     expose:
@@ -15,24 +15,38 @@ services:
     env_file:
       - ./.env/.dev
     depends_on:
-      - django-tenancy-db
-      - django-tenancy-redis
+      - django_realms-db
+      - django_realms-redis
 
-  django-tenancy-db:
+  django_realms-frontend:
+    build:
+      context: .
+      dockerfile: ./compose/dev/frontend/Dockerfile
+    image: django_realms-frontend
+    volumes:
+      - .:/opt/django_realms
+    env_file:
+      - ./.env/.dev-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - django_realms-backend
+
+  django_realms-db:
     image: postgres:14.4
     volumes:
-      - django-tenancy_postgres_data:/var/lib/postgresql/data
+      - django_realms_postgres_data:/var/lib/postgresql/data
     ports:
       - "5433:5432"
     env_file:
       - ./.env/.dev
 
-  django-tenancy-redis:
+  django_realms-redis:
     image: redis:latest
     expose:
       - "6379"
   
-  django-tenancy-nginx:
+  django_realms-nginx:
     build:
       context: .
       dockerfile: ./compose/dev/nginx/Dockerfile
@@ -40,10 +54,10 @@ services:
       - "80:80"
       - "443:443"
     depends_on:
-      - django-tenancy-backend
+      - django_realms-backend
     volumes:
-      - .:/opt/django-tenancy
+      - .:/opt/django_realms
 
     
 volumes:
-  django-tenancy_postgres_data:
+  django_realms_postgres_data:

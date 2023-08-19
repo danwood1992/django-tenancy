@@ -1,13 +1,17 @@
 
-from django.contrib import admin
-from django.urls import path
-from graphene_django.views import GraphQLView
-from .views import HomeView, UnpaidRealmView, SignUpView, IssuesView, ContactView, SupportView,DashboardView, login_view, logout_view
-from apps.core.todo.views import ToDoView
 from django.conf import settings
+from django.contrib import admin
+from django.urls import path, re_path
 # Django docs have a guide on how to use csrf exempt with graphene - https://docs.djangoproject.com/en/3.0/ref/csrf/#ajax
-# Django tenancy will use csrf exempt for now,this may be changed in the future
+# Django django_realms will use csrf exempt for now,this may be changed in the future
 from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
+
+from apps.core.todo.views import ToDoView
+
+from .views import (ContactView, DashboardView, HomeView, IssuesView,
+                    SignUpView, SupportView, UnpaidRealmView, login_view,
+                    logout_view)
 
 # the graphql path is the endpoint for the graphql api, 
 # change to false if you don't want the graphiql browser interface
@@ -21,7 +25,8 @@ admin_patterns = [
 
 tenant_patterns = [
     path('', HomeView.as_view(), name='home'),
-    path('dashboard/<int:realmid>', DashboardView.asView, name='dahsboard view'),
+    path('dashboard/<uuid:realmid>/', DashboardView.as_view(), name='dashboard_view'),
+
     path('login/', login_view, name='login_view'),
     path('logout/', logout_view, name='logout'),
     path('unpaid', UnpaidRealmView.as_view(), name='unpaid'),

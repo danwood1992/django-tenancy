@@ -9,22 +9,38 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'todo' %}">To-do</a>
-                </li>
+           
                 {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'todo' %}">To-do</a>
+                    </li>
+
+                    <!-- Begin Dashboards dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dashboardsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dashboards
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dashboardsDropdown">
+                            {% for realm in realms_can_access %}
+                                <a class="dropdown-item" href="{% url 'dashboard_view' realm.realm.id %}">{{ realm }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <!-- End Dashboards dropdown -->
+
                 {% endif %}
+
             </ul>
         </div>
         {% if not user.is_authenticated %}
         <!-- Moved the button outside of the navbar-collapse div and added ml-auto -->
-        <a class="btn btn-primary ml-auto"data-bs-toggle="modal"data-bs-target="#loginModal">Login</a>
+        <a class="btn btn-primary ml-auto"data-bs-toggle="modal"data-bs-target="#loginModal">Realm Portal</a>
         {% else %}
             
             <a class="btn btn-primary ml-auto" href="{% url 'logout' %}" onclick="handleLogout(); return false;">Logout</a>

@@ -1,5 +1,5 @@
 {
-  "name": "django-realms-frontend",
+  "name": "django_realms-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {

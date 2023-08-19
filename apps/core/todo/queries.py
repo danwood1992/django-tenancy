@@ -1,5 +1,5 @@
 import graphene
-from .models import StaffSeat
+from apps.admin.realms.models import RealmAccount
 from .types import AssignmentType, TaskType, ReminderType, CategoryType, GroupType
 
 class Query(graphene.ObjectType):

@@ -2,9 +2,9 @@ import graphene
 from graphene_django import DjangoObjectType
 from .models import Task, Assignment, Group, Category, Reminder
 from .types import TaskType, AssignmentType, GroupType, CategoryType, ReminderType
-from apps.core.seats.models import StaffSeat
-from apps.core.seats.types import StaffType
-from apps.admin.realms.models.models import Tenant
+from apps.admin.realms.models import RealmAccount
+from apps.admin.realms.types import RealmAccountType
+from apps.admin.realms.models import Realm
 
 # I have commented heavily for an easier time creating a new mutation 
 
@@ -29,13 +29,13 @@ class CreateTaskAndAssign(graphene.Mutation):
         
         # Retrieve objects from the database that are referenced by foreign keys.
         # Fetch the tenant using its unique ID.
-        tenant = Tenant.objects.get(id=tenant_id)
+        realm = Realm.objects.get(id=tenant_id)
         category = Category.objects.get(id=category_id)
-        assigned_by = StaffSeat.objects.get(id=assigned_by_id)
-        assigned_to = StaffSeat.objects.get(id=assigned_to_id)
+        assigned_by = RealmAccount.objects.get(id=assigned_by_id)
+        assigned_to = RealmAccount.objects.get(id=assigned_to_id)
         
         # Create the task
-        task = Task(tenant=tenant, category=category, title=title, description=description, due_date=due_date)
+        task = Task(Realm=realm, category=category, title=title, description=description, due_date=due_date)
         task.save()
 
         # Assign the task to the staff

@@ -22,6 +22,8 @@ class Realm(models.Model):
     def is_tenant_active(self):
         return self.is_active
 
+    def __str__(self) -> str:
+        return self.name
 
 class RealmAccess(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)

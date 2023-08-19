@@ -1,6 +1,6 @@
-# Contributing to Django Tenancy Boilerplate
+# Contributing to Django django_realms Boilerplate
 
-First off, thank you for considering contributing to Django Tenancy, this is my first open source project and i wasnt expecting anyone to be honest. It's people like you that make open source such a great thing.
+First off, thank you for considering contributing to Django django_realms, this is my first open source project and i wasnt expecting anyone to be honest. It's people like you that make open source such a great thing.
 
 ## Where do I go from here?
 

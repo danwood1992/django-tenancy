@@ -1,10 +1,10 @@
-# Django Tenancy Boilerplate
+# Django django_realms Boilerplate
 
 This is an opinionated boilerplate for a multi-tenant Django project, designed to provide a suite of robust features right out of the box. Inspired by django-tenants, this boilerplate provides domain-based tenant routing, incorporates Graphene-Django for GraphQL, and is dockerized for easy setup and deployment. It is built with both front-end and back-end components in the same project to streamline development.
 
 ## Features
 
-* **Multi-Tenancy:** Support for multiple tenants in the same Django instance, with domain-based routing.
+* **Multi-django_realms:** Support for multiple tenants in the same Django instance, with domain-based routing.
 * **Graphene-Django Integration:** Incorporates Graphene-Django for building GraphQL APIs in Python quickly and easily.
 * **Dockerized:** Project components are containerized using Docker for easy setup, deployment, and distribution.
 * **Unified Structure:** The front-end and back-end are integrated into the same project, making it easier to manage and develop.
@@ -17,7 +17,7 @@ You need to have Docker installed on your machine to run this project locally.
 
 1. Ensure git and Docker are installed on your machine.
 
-2. Clone this project: ```git clone https://github.com/danwood1992/django-tenancy-boiler.git```
+2. Clone this project: ```git clone https://github.com/danwood1992/django_realms-boiler.git```
 
 or you can create your own repo.
 
@@ -116,7 +116,7 @@ The folder structure is as follows:
 ├── docker-compose.yml
 ├── docs
 │   ├── create_management_tenant.png
-│   └── django-tenancy-guide
+│   └── django_realms-guide
 │       └── index.html
 ├── html_templates
 │   ├── core
@@ -139,7 +139,7 @@ The folder structure is as follows:
 
 Out of the box tests are simple, you should be able to run the following command to run the tests.
 
-```docker-compose exec django_tenancy-backend python3 manage.py test```
+```docker-compose exec django_realms-backend python3 manage.py test```
 
 Because the boiler has has a folder called 'apps', and then split between management and tenant app folders this is for seperation of concern. 
 
@@ -147,7 +147,7 @@ You can obviously change this to suit your needs.
 
 Out of the box a django test command may look like this.
 
-```docker-compose exec django_tenancy-backend python3 manage.py test apps.management.tenant_management.tests```
+```docker-compose exec django_realms-backend python3 manage.py test apps.management.tenant_management.tests```
 
 <hr>
 
@@ -155,7 +155,7 @@ Out of the box a django test command may look like this.
 
 * **Daniel Wood** - *Initial work* - [danwood1992](https://github.com/danwood1992)
 
-See also the list of [contributors](https://github.com/danwood1992/django-tenancy-boiler/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/danwood1992/django_realms-boiler/contributors) who participated in this project.
 
 <hr>
 

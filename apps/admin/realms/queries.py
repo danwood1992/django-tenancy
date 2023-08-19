@@ -1,10 +1,10 @@
 import graphene
 from .models import Realm
 
-from .types import RealmtType, DomainType
+from .types import RealmType, RealmAccessType, RealmAccountType
 
 class Query(graphene.ObjectType):
-    realms = graphene.List(RealmtType)
+    realms = graphene.List(RealmType)
 
     def resolve_all_realms(self, info, **kwargs):
-        return RealmtType.objects.all()
+        return RealmType.objects.all()

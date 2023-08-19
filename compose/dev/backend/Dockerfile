@@ -35,6 +35,6 @@ COPY ./compose/dev/backend/start /start
 RUN chmod +x /start
 
 # Set working directory
-WORKDIR /opt/django-tenancy
+WORKDIR /opt/django_realms
 
 ENTRYPOINT [ "/entrypoint" ]

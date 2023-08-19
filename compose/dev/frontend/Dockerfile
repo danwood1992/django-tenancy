@@ -6,12 +6,13 @@ ENV NODE_ENV=development
 
 # Set working directory
 
-WORKDIR /opt/django_tenancy/frontend
+WORKDIR /opt/django_realms/django_realms-frontend
 
 # Install packages
 
-COPY ./frontend/package.json ./package.json
-COPY ./frontend/package-lock.json ./package-lock.json
+COPY ./django_realms-frontend/package.json ./package.json
+COPY ./django_realms-frontend/package-lock.json ./package-lock.json
+
 
 RUN npm ci
 
@@ -21,4 +22,4 @@ EXPOSE 3000
 
 # Start server
 
-CMD ["npm", "start"]
+CMD ["npm", "run","dev"]

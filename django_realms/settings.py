@@ -67,18 +67,18 @@ MIDDLEWARE = [
 ]
 
 #channels 
-ASGI_APPLICATION = "django_tenancy.asgi.application"
+ASGI_APPLICATION = "django_realms.asgi.application"
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("django-tenancy-redis", 6379)], # use redis container name
+            "hosts": [("django_realms-redis", 6379)], # use redis container name
         },
     },
 }
 
 
-ROOT_URLCONF = 'django_tenancy.urls'
+ROOT_URLCONF = 'django_realms.urls'
 
 TEMPLATES = [
     {
@@ -96,12 +96,12 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'django-tenancy.wsgi.application'
+WSGI_APPLICATION = 'django_realms.wsgi.application'
 
 DATABASES = {
     'default': {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.environ.get("SQL_DATABASE", "django_tenancy"),
+        "NAME": os.environ.get("SQL_DATABASE", "django_realms"),
         "USER": os.environ.get("SQL_USER", "user"),
         "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
@@ -152,7 +152,7 @@ MESSAGE_TAGS = {
 
 # api settings
 GRAPHENE = {
-    "SCHEMA": "django_tenancy.schema.schema"
+    "SCHEMA": "django_realms.schema.schema"
 }
 GRAPHQL_JWT = {
     'JWT_VERIFY_EXPIRATION': True,
