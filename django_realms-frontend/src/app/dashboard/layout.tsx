@@ -2,7 +2,7 @@ import { Inter, Lexend } from 'next/font/google'
 import clsx from 'clsx'
 import Footer from './footer'
 import Nav from './navigation'
-import Title from './title'
+
 import '@/styles/tailwind.css'
 import { type Metadata } from 'next'
 import React from 'react'
@@ -29,25 +29,22 @@ const lexend = Lexend({
 })
 
 
-
 export default function DashboardLayout({
   children, // will be a page or nested layout
+  title = '',
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
+  title?: string;
 }) {
   return (
-  <div>
-  <Nav />
-  <div className="ml-80 flex-col h-screen ">
-    <Title />
-    <div className="">
-      {children}
+    <div>
+      <Nav />
+      <div className="ml-80 flex-col h-screen ">
+        <div className="">
+          {children}
+        </div>
+      </div>
+      <Footer />
     </div>
-  </div>
- 
-  <Footer />
-
-  </div>
-     
-  )
+  );
 }
