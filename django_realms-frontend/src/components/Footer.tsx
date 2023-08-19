@@ -45,10 +45,11 @@ export function Footer() {
               </svg>
             </Link>
           </div>
+          
           <p className="mt-6 text-sm text-slate-500 sm:mt-0">
-            Copyright &copy; {new Date().getFullYear()} TaxPal. All rights
-            reserved.
+            OpenSource {new Date().getFullYear()} Built by <a href="https://github.com/danwood1992" target="_blank" rel="noopener noreferrer" className="text-slate-700 hover:text-slate-800">Dan Wood</a>.
           </p>
+
         </div>
       </Container>
     </footer>

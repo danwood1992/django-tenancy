@@ -2,7 +2,7 @@ export function Logo(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg width="500" height="100" viewBox="0 0 500 100" {...props}>
       {/* Text */}
-      <text x="20" y="70" font-family="Arial" font-size="50" font-weight="bold" fill="#4ade80">
+      <text x="20" y="70" font-family="Arial" font-size="50" font-weight="bold" fill="#2D3748">
         Django Realms
       </text>
       {/* Inner circles representing multiple realms or tenants with different colors */}

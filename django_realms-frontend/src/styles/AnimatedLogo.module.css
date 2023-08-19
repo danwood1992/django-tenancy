@@ -1,0 +1,45 @@
+@keyframes flicker {
+  0%, 20% { opacity: 0.6; }
+  70% { opacity: 0; }
+  100% { opacity: 0.6; }
+}
+
+@keyframes bobUpAndDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2%); }
+}
+
+@keyframes bobSideToSide {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(9%); }
+}
+
+.flicker {
+  animation-name: flicker;
+  animation-iteration-count: infinite;
+}
+
+/* Starting with the top-left */
+.topleft {
+  animation: flicker 2.5s 0s infinite, bobUpAndDown 7s infinite; /* No delay for the start */
+}
+
+/* Followed by the top-right */
+.topright {
+  animation: flicker 2.8s 0.5s infinite, bobUpAndDown 6.6s infinite reverse; /* Delay of 0.5s to ripple */
+}
+
+/* Then the center */
+.center {
+  animation: flicker 2.7s 1s infinite; /* Delay of 1s */
+}
+
+/* Followed by the bottom-left */
+.bottomleft {
+  animation: flicker 2.4s 1.5s infinite, bobSideToSide 6.2s infinite; /* Delay of 1.5s to ripple */
+}
+
+/* And finally, the bottom-right */
+.bottomright {
+  animation: flicker 2.6s 2s infinite, bobSideToSide 6s infinite reverse; /* Delay of 2s to ripple */
+}
