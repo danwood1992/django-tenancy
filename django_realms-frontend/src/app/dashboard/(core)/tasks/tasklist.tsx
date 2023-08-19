@@ -2,12 +2,25 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 
-const statuses = {
-  Complete: 'text-green-700 bg-green-50 ring-green-600/20',
-  'In progress': 'text-gray-600 bg-gray-50 ring-gray-500/10',
-  Archived: 'text-yellow-800 bg-yellow-50 ring-yellow-600/20',
+type Statuses = {
+  [key: string]: string;
+
 }
-const projects = [
+type Project = {
+  id: number;
+  name: string;
+  href: string;
+  status: keyof Statuses;
+  createdBy: string;
+  dueDate: string;
+  dueDateTime: string;
+}
+const statuses: Statuses = {
+  'Complete': 'text-green-700 bg-green-50 ring-green-600/20',
+  'In progress': 'text-gray-600 bg-gray-50 ring-gray-500/10',
+  'Archived': 'text-yellow-800 bg-yellow-50 ring-yellow-600/20',
+}
+const projects: Project[] = [
   {
     id: 1,
     name: 'GraphQL API',
@@ -55,7 +68,7 @@ const projects = [
   },
 ]
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 

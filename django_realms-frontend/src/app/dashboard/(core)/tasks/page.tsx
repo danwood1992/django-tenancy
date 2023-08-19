@@ -7,7 +7,7 @@ import { useState } from 'react';
 const title = 'Tasks'
 
 function Tasks() {
-  const [activeTab, setActiveTab] = useState('My Tasks');
+  const [activeTab, setActiveTab] = useState('MyTasks');
   const myTabs = [
     { name: 'MyTasks', href: '#', current: true },
     { name: 'Assigned', href: '#', current: false },
