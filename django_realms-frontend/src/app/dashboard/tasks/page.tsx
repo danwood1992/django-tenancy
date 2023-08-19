@@ -1,13 +1,11 @@
+"use client"
 import { type Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Dashboard',
-}
+import Tasklist from './tasklist'
 
 export default function Account() {
   return (
       <div>
-      <h1>Tasks section</h1>
+      <Tasklist />
       </div>
   )
 }

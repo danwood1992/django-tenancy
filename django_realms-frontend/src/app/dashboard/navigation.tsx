@@ -1,5 +1,6 @@
 "use client"
 import { DiDjango,DiReact} from "react-icons/di";
+import {FaClipboardList} from "react-icons/fa";
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
@@ -26,11 +27,12 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard/', icon: HomeIcon, current: true },
-  { name: 'Tasks', href: '/dashboard/tasks/', icon: UsersIcon, current: false },
+  { name: 'Tasks', href: '/dashboard/tasks/', icon: FaClipboardList, current: false },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
   { name: 'Calendar', href: '/dashboard/calender/', icon: CalendarIcon, current: false },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
   { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+  { name: 'Users', href: '/dashboard/users/', icon: UsersIcon, current: false },
 ]
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
