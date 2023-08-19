@@ -1,4 +1,4 @@
-import Stats from './stats'
+import AddPost from './addpost'
 import { type Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export default function Dashboard() {
   return (
       <div>
       
-      <Stats />
+      <AddPost />
       </div>
   )
 }

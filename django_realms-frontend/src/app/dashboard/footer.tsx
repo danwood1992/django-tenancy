@@ -1,5 +1,5 @@
 import { SVGProps } from "react";
-
+import { FaCcStripe } from "react-icons/fa";
 type MainNavItem = {
   name: string;
   href: string;

@@ -1,8 +1,10 @@
 "use client"
 import { DiDjango,DiReact} from "react-icons/di";
 import {FaClipboardList} from "react-icons/fa";
+import {MdFitScreen} from "react-icons/md";
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+import ToggleFullScreen from "@/utils/dashboard/toggleFullscreen";
 import {
   Bars3Icon,
   BellIcon,
@@ -272,18 +274,12 @@ export default function Navigation() {
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-              
-                <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
-                  <span className="sr-only">All apps</span>
-                  <DiReact className="h-6 w-6" aria-hidden="true" />
-                </button>
-                <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
-                  <span className="sr-only">Sparkles</span>
-                  <DiDjango className="h-10 w-10" aria-hidden="true" />
-                </button>
-                <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+     
+               
+                <button type="button" onClick={ToggleFullScreen} className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
                   <span className="sr-only">Security</span>
-                  <KeyIcon className="h-6 w-6" aria-hidden="true" />
+                  
+                  <MdFitScreen className="h-6 w-6" aria-hidden="true" />
                 </button>
 
                 {/* Separator */}
