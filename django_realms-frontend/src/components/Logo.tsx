@@ -7,7 +7,7 @@ export function Logo(props: React.ComponentPropsWithoutRef<'svg'>) {
       </text>
       {/* Inner circles representing multiple realms or tenants with different colors */}
       <circle cx="410" cy="35" r="10" fill="#2D3748"/> {/* Slate color */}
-      <circle cx="425" cy="50" r="10" fill="#4ade80"/> {/* Green color */}
+
       <circle cx="440" cy="35" r="10" fill="#2D3748"/> {/* Slate color */}
       <circle cx="410" cy="65" r="10" fill="#4ade80"/> {/* Green color */}
       <circle cx="440" cy="65" r="10" fill="#2D3748"/> {/* Slate color */}

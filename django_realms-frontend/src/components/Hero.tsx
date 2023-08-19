@@ -2,17 +2,16 @@
 import { AnimatedLogo } from '@/components/AnimatedLogo'
 import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
+import { NavLink } from './NavLink'
 
 export function Hero() {
   return (
     <Container className="relative pb-16 pt-20 text-center lg:pt-32 mt-10">
       
       {/* AnimatedLogo positioned absolutely to span the entire container */}
-      <AnimatedLogo className="absolute top-0 left-0 w-full h-full z-0" />
-
       <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl z-10">
         {' '}
-        
+      <AnimatedLogo className="absolute top-0 left-0 w-full h-full z-0" />
         <span className="relative whitespace-nowrap text-green-600 z-10">
           Kickstart
         </span>{' '}
@@ -34,7 +33,9 @@ export function Hero() {
           </svg>
           <span className="ml-3 z-10">Watch video</span>
         </Button>
+        
       </div>
+      
     </Container>
   )
 }
