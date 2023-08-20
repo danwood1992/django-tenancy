@@ -32,6 +32,18 @@ services:
     depends_on:
       - django_realms-backend
 
+  django_realms-documentation:
+    build:
+      context: .
+      dockerfile: ./compose/dev/documentation/Dockerfile
+    image: django_realms-documentation
+    volumes:
+      - .:/opt/django_realms
+    env_file:
+      - ./.env/.dev-documentation
+    ports:
+      - "3001:3000"
+      
   django_realms-db:
     image: postgres:14.4
     volumes:
