@@ -1,6 +1,11 @@
 from graphene_django import DjangoObjectType
 from .models import Realm, RealmAccess, RealmAccount
+from django.contrib.auth.models import User
 
+class UserType(DjangoObjectType):
+    class Meta:
+        model = User
+        fields = "__all__"
 
 class RealmType(DjangoObjectType):
     class Meta:

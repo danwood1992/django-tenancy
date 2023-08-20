@@ -8,7 +8,7 @@ from apps.admin.realms.mutations import Mutation as RealmMutations
 from apps.admin.realms.queries import Query as RealmQueries
 
 logger = logging.getLogger(__name__)
-class Query(ToDoQueries,graphene.ObjectType):
+class Query(RealmQueries,ToDoQueries,graphene.ObjectType):
     pass
 
 class Mutation(RealmMutations,ToDoMutations,graphene.ObjectType):

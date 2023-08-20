@@ -1,5 +1,6 @@
 import { Inter, Lexend } from 'next/font/google'
 import clsx from 'clsx'
+import { ApolloWrapper } from '@/utils/apolloWrapper';
 
 import './globals.css'
 import '@/styles/tailwind.css'
@@ -40,7 +41,7 @@ export default function RootLayout({
         lexend.variable,
       )}
     >
-      <body className="flex h-full flex-col">{children}</body>
+      <body className="flex h-full flex-col"><ApolloWrapper>{children}</ApolloWrapper></body>
     </html>
   )
 }

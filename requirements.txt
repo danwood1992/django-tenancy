@@ -55,3 +55,4 @@ txaio==23.1.1 # Compatibility API between asyncio/Twisted/Trollius.
 zope.interface==6.0 # Interfaces for Python.
 django-jazzmin==2.6.0 # A fresh and modern theme for Django Admin.
 
+django-cors-headers # Django app for handling the server headers required for Cross-Origin Resource Sharing (CORS).

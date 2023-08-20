@@ -2,10 +2,13 @@
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, re_path
-# Django docs have a guide on how to use csrf exempt with graphene - https://docs.djangoproject.com/en/3.0/ref/csrf/#ajax
-# Django django_realms will use csrf exempt for now,this may be changed in the future
-from django.views.decorators.csrf import csrf_exempt
+
+
 from graphene_django.views import GraphQLView
+from graphql_jwt.decorators import jwt_cookie
+
+from django.views.decorators.csrf import csrf_exempt
+
 
 from apps.core.todo.views import ToDoView
 
@@ -37,7 +40,7 @@ tenant_patterns = [
                    
     ]
 
-api_patterns = [path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+api_patterns = [path("graphql/", jwt_cookie(GraphQLView.as_view(graphiql=True))),
     ]
 
 if settings.USE_DJANGO_TEMPLATES:

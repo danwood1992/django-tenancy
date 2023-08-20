@@ -9,11 +9,13 @@ import {
 } from "@apollo/experimental-nextjs-app-support/ssr";
 import React from "react";
 
-const vastdesk_api_url = process.env.REACT_APP_VASTDESK_API_URL;
+const api_url = process.env.NEXT_PUBLIC_DJANGO_REALMS_API_URL;
+
+console.log("api_url", api_url);
 
 function makeClient() {
     const httpLink = new HttpLink({
-        uri: vastdesk_api_url,
+        uri: api_url,
         fetchOptions: {
             cache: "no-store",
         },

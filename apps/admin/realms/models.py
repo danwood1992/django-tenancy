@@ -33,7 +33,7 @@ class RealmAccess(models.Model):
     is_primary = models.BooleanField(default=False)
     
     def __str__(self) -> str:
-        return self.realm.name
+        return f'{self.user} | Access to {self.realm}'
     
 class RealmAccount(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
@@ -44,4 +44,4 @@ class RealmAccount(models.Model):
     instagram_url = models.CharField(max_length=100, null=True, blank=True)
     
     def __str__(self) -> str:
-        return f'{self.realm_access.user.username} - {self.realm_access.realm.name}'
+        return f'{self.realm_access.user} - In {self.realm_access.realm.name}'
