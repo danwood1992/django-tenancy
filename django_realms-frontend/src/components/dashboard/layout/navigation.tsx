@@ -28,13 +28,13 @@ import {
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard/', icon: HomeIcon, current: true },
-  { name: 'Tasks', href: '/dashboard/tasks/', icon: FaClipboardList, current: false },
+  { name: 'Dashboard', href: '/dashboard/realmId', icon: HomeIcon, current: true },
+  { name: 'Tasks', href: '/dashboard/realmId/tasks/', icon: FaClipboardList, current: false },
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '/dashboard/calender/', icon: CalendarIcon, current: false },
+  { name: 'Calendar', href: '/dashboard/realmId/calender/', icon: CalendarIcon, current: false },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
   { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-  { name: 'Users', href: '/dashboard/users/', icon: UsersIcon, current: false },
+  { name: 'Users', href: '/dashboard/realmId/users/', icon: UsersIcon, current: false },
 ]
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },

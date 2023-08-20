@@ -3,8 +3,9 @@
  * @returns {TSX/TSX.Element} The dashboard page component.
  */
 "use client"
-import Stats from '../../components/dashboard/common/stats'
-import Pageheader from '../../components/dashboard/common/pageheader'
+import Stats from '@/components/dashboard/common/stats'
+import Pageheader from '@/components/dashboard/common/pageheader'
+import AddPost from '@/components/dashboard/common/addpost'
 import React from 'react';
 import { useState } from 'react';
 
@@ -15,17 +16,17 @@ function Dashboard() {
   
   const myTabs = [
     { name: 'General', href: '#', current: true },
-    { name: 'Billing', href: '#', current: false },
+    { name: 'Timeline', href: '#', current: false },
     { name: 'Notifications', href: '#', current: false },
     { name: 'Team Members', href: '#', current: false },
     { name: 'Team Settings', href: '#', current: false },
   ];
   
   const actions = (
-    <div className="p-4 flex md:absolute md:right-0 md:top-3 md:mt-0 mr-2 ">
+    <div className="page-header-actions">
       <button
         type="button"
-        className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        className="page-header-actions-button"
       >
         Share
       </button>
@@ -48,7 +49,7 @@ function Dashboard() {
         setActiveTab={setActiveTab} 
       />
       {activeTab === 'General' && <div>Stats<Stats /></div>}
-      {activeTab === 'Billing' && <div>Billing Content</div>}
+      {activeTab === 'Timeline' && <div>Timeline<AddPost /></div>}
       {activeTab === 'Notifications' && <div>Notifications Content</div>}
       {activeTab === 'Team Members' && <div>Team Members Content</div>}
       {activeTab === 'Team Settings' && <div>Team Settings Content</div>}

@@ -1,6 +1,6 @@
 import { Inter, Lexend } from 'next/font/google'
-import Footer from '../../components/dashboard/layout/footer'
-import Nav from '../../components/dashboard/layout/navigation'
+import Footer from '../../../components/dashboard/layout/footer'
+import Nav from '../../../components/dashboard/layout/navigation'
 import '@/styles/tailwind.css'
 import { type Metadata } from 'next'
 import React from 'react'

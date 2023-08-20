@@ -1,7 +1,7 @@
 "use client"
-import MyDay from '../../../../components/dashboard/calender/myday'
-import MyTeamsDay from '../../../../components/dashboard/calender/myteamsday'
-import Pageheader from '../../../../components/dashboard/common/pageheader'
+import MyDay from '@/components/dashboard/calender/myday'
+import MyTeamsDay from '@/components/dashboard/calender/myteamsday'
+import Pageheader from '@/components/dashboard/common/pageheader'
 import React from 'react';
 import { useState } from 'react';
 

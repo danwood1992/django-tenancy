@@ -34,7 +34,7 @@ export default function AddPost() {
   const [dated, setDated] = useState(dueDates[0])
 
   return (
-    <div className="mr-4">
+    <div className="mt-4 mr-4">
     <form action="#" className="relative">
       <div className="overflow-hidden rounded-lg border border-gray-300 shadow-sm focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500 ">
         <label htmlFor="title" className="sr-only">

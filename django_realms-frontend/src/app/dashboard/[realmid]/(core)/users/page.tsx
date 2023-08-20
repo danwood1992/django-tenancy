@@ -1,5 +1,5 @@
 import { type Metadata } from 'next'
-import UserTable from '../../../../components/dashboard/users/usertable'
+import UserTable from '@/components/dashboard/users/usertable'
 export const metadata: Metadata = {
   title: 'Dashboard',
 }

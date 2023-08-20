@@ -1,6 +1,6 @@
 "use client"
 import Tasklist from '@/components/dashboard/tasks/tasklist'
-import Pageheader from '../../../../components/dashboard/common/pageheader'
+import Pageheader from '@/components/dashboard/common/pageheader'
 import React from 'react';
 import { useState } from 'react';
 
