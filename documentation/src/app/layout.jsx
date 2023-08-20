@@ -7,6 +7,7 @@ import { Layout } from '@/components/Layout'
 
 import '@/styles/tailwind.css'
 
+
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',

@@ -6,10 +6,11 @@ Kickstarting your Big SaaS idea using a Django, Grapqhl and React techstack has 
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="paper-airplane" href="docs/getting-started" description="The guide for getting Django Realms up and kicking." /%}
+{% quick-link title="Project Structure" icon="paper-airplane" href="getting-started/project-structure/" description="The guide for getting Django Realms up and kicking." /%}
 
-{% quick-link title="Building" icon="wrench-screwdriver" href="/architecture" description="The guide for how we structure our code and directrory structure." /%}
+{% quick-link title="Installation" icon="wrench-screwdriver" href="getting-started/installation/" description="The guide for how we structure our code and directrory structure." /%}
 
+{% quick-link title="Configuration" icon="wrench-screwdriver" href="/architecture" description="The guide for how we structure our code and directrory structure." /%}
 
 {% /quick-links %}
 
@@ -29,9 +30,9 @@ While Django Realms is crafted to be intuitive, having a foundational understand
 
 ## Built on top of the following technologies:
 
-**Django**: The high-level Python web framework that encourages rapid development and clean, pragmatic design. If you're unfamiliar, start with [Django's official documentation.](https://docs.djangoproject.com/en/3.2/)
+**Django**: The high-level Python web framework that encourages rapid development and clean, pragmatic design. If you're unfamiliar, start with [Django's official documentation.](https://docs.djangoproject.com/en/4.2/)
 
-**React**: A JavaScript library for building user interfaces. It's component-driven and has been a game-changer in the frontend realm. Start with [React's official docs.](https://reactjs.org/docs/getting-started.html)
+**NextJS**: A powerful framework for building React applications, bolstered by both server and client-side rendering capabilities. Go over to [NextJs ](https://nextjs.org/docs). They have great documentation.
 
 **GraphQL**: A query language for APIs and a runtime for fulfilling those queries with your existing data. [GraphQL's official docs](https://graphql.org/learn/) are a great place to start.
 
