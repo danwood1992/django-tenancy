@@ -1,6 +1,6 @@
 import { Inter, Lexend } from 'next/font/google'
-import Footer from './_components/footer'
-import Nav from './_components/navigation'
+import Footer from '../../components/dashboard/layout/footer'
+import Nav from '../../components/dashboard/layout/navigation'
 import '@/styles/tailwind.css'
 import { type Metadata } from 'next'
 import React from 'react'
@@ -36,7 +36,7 @@ export default function DashboardLayout({
   return (
     <div>
       <Nav />
-      <div className="ml-80 flex-col h-screen ">
+      <div className="dash-container">
           {children}
       </div>
       <Footer />

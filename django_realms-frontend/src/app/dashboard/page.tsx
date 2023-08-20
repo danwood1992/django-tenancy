@@ -3,8 +3,8 @@
  * @returns {TSX/TSX.Element} The dashboard page component.
  */
 "use client"
-import Stats from './_components/stats'
-import Pageheader from './_components/pageheader'
+import Stats from '../../components/dashboard/common/stats'
+import Pageheader from '../../components/dashboard/common/pageheader'
 import React from 'react';
 import { useState } from 'react';
 

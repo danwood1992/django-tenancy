@@ -4,7 +4,7 @@ import {FaClipboardList} from "react-icons/fa";
 import {MdFitScreen} from "react-icons/md";
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import ToggleFullScreen from "../_utils/toggleFullscreen";
+import ToggleFullScreen from "../../../utils/dashboard/toggleFullscreen";
 import {
   Bars3Icon,
   BellIcon,

@@ -1,4 +1,4 @@
-import AddPost from './_components/addpost'
+import AddPost from '../../../../components/dashboard/common/addpost'
 import { type Metadata } from 'next'
 
 export const metadata: Metadata = {

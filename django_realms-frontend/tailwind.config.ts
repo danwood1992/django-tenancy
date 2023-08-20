@@ -1,6 +1,7 @@
 import formsPlugin from '@tailwindcss/forms'
 import headlessuiPlugin from '@headlessui/tailwindcss'
 import { type Config } from 'tailwindcss'
+import colors from 'tailwindcss/colors'
 
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -32,6 +33,19 @@ export default {
         '2xl': '40rem',
       },
     },
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      brand: "#e97d02",
+      black: colors.black,
+      white: colors.white,
+      gray: colors.gray,
+      emerald: colors.emerald,
+      indigo: colors.indigo,
+      yellow: colors.yellow,
+      slate: colors.slate,
+      green: colors.green,
+  },
   },
   plugins: [formsPlugin, headlessuiPlugin],
  

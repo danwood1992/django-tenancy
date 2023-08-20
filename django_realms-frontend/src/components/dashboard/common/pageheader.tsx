@@ -27,7 +27,7 @@ const Pageheader: React.FC<PageheaderProps> = ({
 }) => {
   return (
 
-    <div className="relative border-b border-slate-200 pb-5 sm:pb-0 p-3 mb-4">
+    <div className="relative border-b border-slate pb-5 sm:pb-0 p-3 mb-4">
     <div className="md:flex md:items-center md:justify-between">
         <h5 className="text-base font-semibold leading-6 text-slate-900">{title}</h5>
         {actions}
