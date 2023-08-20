@@ -12,10 +12,23 @@ import Image from 'next/image'
 
 export const navigation = [
   {
-    title: 'Introduction',
+    title: 'Getting Started',
     links: [
       { title: 'Overview', href: '/' },
-      { title: 'Installation', href: '/docs/installation' },
+      { title: 'Installation', href: '/getting-started/installation' },
+      { title: 'Project Structure', href: '/getting-started/project-structure' },
+      { title: 'Configuration', href: '/getting-started/configuration' },
+      
+    ],
+  },
+  {
+    title: 'Building',
+    links: [
+      { title: 'Routing', href: '/building/data-fetching' },
+      { title: 'Data-fetching', href: '/building/data-fetching' },
+      { title: 'Layouts', href: '/building/layouts' },
+      { title: 'Components', href: '/building/components' },
+      
     ],
   },
 ]

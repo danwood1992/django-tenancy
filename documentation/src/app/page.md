@@ -1,58 +1,21 @@
 ---
-title: Welcome to the django realms documentation.
+title: Django Realms documentation.
 ---
 
-Kickstarting your Big SaaS idea using a django grapqhl and react techstack has never been easier thanks too [DjangoRealms](https://realms.imperisoft.co.uk) {% .lead %}
+Kickstarting your Big SaaS idea using a Django, Grapqhl and React techstack has never been easier thanks too [DjangoRealms](https://realms.imperisoft.co.uk) {% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="architecture" href="/deployment" description="The guide for how we deploy VastDesk to both staging and production." /%}
+{% quick-link title="Getting Started" icon="paper-airplane" href="docs/getting-started" description="The guide for getting Django Realms up and kicking." /%}
 
-{% quick-link title="Code Architecture" icon="architecture" href="/architecture" description="The guide for how we structure our code and directrory structure." /%}
+{% quick-link title="Building" icon="wrench-screwdriver" href="/architecture" description="The guide for how we structure our code and directrory structure." /%}
 
-{% quick-link title="Git Guide" icon="github" href="/git-guide" description="Our Git guide explaining how we use it for a smooth development process." /%}
-
-{% quick-link title="Writing Documentation" icon="pencil" href="/writing-documentation" description="Learn to how to write and create beatiful and informative documentation." /%}
 
 {% /quick-links %}
 
 ---
+## Welcome to Django Realms
 
-## Getting Started
+Welcome to Django Realms, an amalgamation of the robustness of Django and the dynamism of React, tailored to provide a seamless development experience. At its core, Django Realms embodies a vision of an opinionated tech stack, built upon technologies and practices that resonate with our philosophy of effective and efficient web development.
 
-To contribute to VastDesk, the first thing you need to do is fork the repository which you will find [here](https://github.com/vastdesk/vastdesk). Once on that page you will find the fork button in the top right corner. Once you have forked the repository, you will need to clone it to your local machine. To do this, you will need to run the following command in your terminal:
-
-```shell
-git clone git@github.com:YOUR_USERNAME/vastdesk.git
-```
-
-Once you have cloned the repository, you will need to ensure you have the upstream set up correctly. To do this, you will need to run the following command in your terminal:
-
-```shell
-git remote -v
-```
-
-You should see something like this:
-
-```shell
-origin  https://github.com/YOUR_USERNAME/vastdesk (fetch)
-origin  https://github.com/YOUR_USERNAME/vastdesk (push)
-upstream        https://github.com/VastDesk/vastdesk.git (fetch)
-upstream        https://github.com/VastDesk/vastdesk.git (push)
-```
-
-If your upstream is not set to the VastDesk repository, you will need to run the following command in your terminal:
-
-```shell
-git remote add upstream git@github.com:vastdesk/vastdesk.git
-```
-
-### Installing dependencies
-
-The next step is to start installing all the dependencies. To do this, you will need to run the following command in your terminal:
-
-```shell
-tools/prep-dev-environment
-```
-
-You will also need to ensure you have Docker Desktop installed as well as WSL installed if working on Windows. You can find the Docker Desktop installation instructions [here](https://docs.docker.com/get-docker/). You can find the WSL installation instructions [here](https://docs.microsoft.com/en-us/windows/wsl/install-win10). On Linux, you will need to ensure you have Docker installed. You can find the Docker installation instructions [here](https://docs.docker.com/engine/install/).
+As an open-source project, not only do we invite you to utilize Django Realms for your applications, but we also encourage you to dive deep, tinker, and even contribute to its growth. The philosophy behind making it open source stems from the belief that the combined knowledge and expertise of the community can enhance, refine, and propel Django Realms to new heights.

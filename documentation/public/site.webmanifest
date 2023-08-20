@@ -1,6 +1,6 @@
 {
-    "name": "VastDesk",
-    "short_name": "VastDesk",
+    "name": "DjangoRealms",
+    "short_name": "Realms",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
