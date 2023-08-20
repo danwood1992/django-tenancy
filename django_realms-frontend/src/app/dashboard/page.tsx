@@ -1,3 +1,7 @@
+/**
+ * Renders the dashboard page with tabs and actions.
+ * @returns {TSX/TSX.Element} The dashboard page component.
+ */
 "use client"
 import Stats from './_components/stats'
 import Pageheader from './_components/pageheader'
@@ -33,8 +37,6 @@ function Dashboard() {
       </button>
     </div>
   );
-
-
 
   return (
     <div>

@@ -7,7 +7,7 @@ import { type Metadata } from 'next'
 export const metadata: Metadata = {
   title: {
     template: '%s - Django Realms',
-    default: 'Djang Realms - Tenancy made simple for startup Django devs',
+    default: 'Django Realms - Tenancy made simple for startup Django devs',
   },
   description:
     'Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited.',

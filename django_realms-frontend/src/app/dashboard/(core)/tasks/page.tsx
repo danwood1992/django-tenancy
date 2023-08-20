@@ -1,5 +1,5 @@
 "use client"
-import Tasklist from './tasklist'
+import Tasklist from './_components/tasklist'
 import Pageheader from '../../_components/pageheader'
 import React from 'react';
 import { useState } from 'react';
