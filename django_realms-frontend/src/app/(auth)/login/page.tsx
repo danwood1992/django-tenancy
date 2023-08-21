@@ -1,8 +1,12 @@
 'use client'
 import { gql } from '@apollo/client';
 import { useMutation } from '@apollo/client/react';
-
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+
+
+
+
 
 export const LOGIN_USER = gql`
   mutation LoginUser($username: String!, $password: String!) {
@@ -27,6 +31,7 @@ export const LOGIN_USER = gql`
 `;
 
 export default function Login() {
+  const router = useRouter();
   const [loginUser, { loading, error, data }] = useMutation(LOGIN_USER);
   // const router = useRouter();
   const [realmId, setRealmId] = useState<string | null>(null)
@@ -55,7 +60,7 @@ export default function Login() {
          
 
           // Redirect to a path using the extracted realmId. Modify the path as per your requirement.
-          window.location.href = `/dashboard/${realmId}/`;
+          router.push(`/dashboard/${realmId}`);
 
         } else {
           console.error("No primary realm found");

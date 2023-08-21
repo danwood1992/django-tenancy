@@ -5,6 +5,13 @@ import '@/styles/tailwind.css'
 import { type Metadata } from 'next'
 import React from 'react'
 
+
+// map data to realmId
+
+// use realmId to get realm data
+
+
+
 export const metadata: Metadata = {
   title: {
     template: '%s - Django Realms',

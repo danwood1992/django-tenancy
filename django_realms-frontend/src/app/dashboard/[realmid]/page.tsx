@@ -1,31 +1,18 @@
-/**
- * Renders the dashboard page with tabs and actions.
- * @returns {TSX/TSX.Element} The dashboard page component.
- */
+
 "use client"
 import Stats from '@/components/dashboard/common/stats'
 import Pageheader from '@/components/dashboard/common/pageheader'
 import AddPost from '@/components/dashboard/common/addpost'
 import React from 'react';
 import { useState } from 'react';
-import { request } from 'http';
+import { useCheckRealm } from '@/hooks/useCheckRealm';
 
 const title = 'Dashboard'
 
-
-
-
-
 function Dashboard() {
-
-  // if not authenticated dont render
-  // user = request.user
-// render components relevent to user role i realm
-  // realmId = request.user.realmaccess.realmAccount.id  
-
-  // if (!realmId) {
-  //   return <div>Not authenticated</div>;
-  // }
+  const { data, loading, error } = useCheckRealm();
+  // console.table(data.viewer);
+  
   const [activeTab, setActiveTab] = useState('General');
   
   const myTabs = [
@@ -75,4 +62,6 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+
 
