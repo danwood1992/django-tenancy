@@ -8,10 +8,24 @@ import Pageheader from '@/components/dashboard/common/pageheader'
 import AddPost from '@/components/dashboard/common/addpost'
 import React from 'react';
 import { useState } from 'react';
+import { request } from 'http';
 
 const title = 'Dashboard'
 
+
+
+
+
 function Dashboard() {
+
+  // if not authenticated dont render
+  // user = request.user
+// render components relevent to user role i realm
+  // realmId = request.user.realmaccess.realmAccount.id  
+
+  // if (!realmId) {
+  //   return <div>Not authenticated</div>;
+  // }
   const [activeTab, setActiveTab] = useState('General');
   
   const myTabs = [
@@ -40,8 +54,10 @@ function Dashboard() {
   );
 
   return (
+    
     <div>
       <Pageheader 
+        
         title={title} 
         tabs={myTabs} 
         actions={actions} 
