@@ -1,87 +1,149 @@
-"use client"
-// Used the useState hook to store the form's email and password.
-// Added an onSubmit event to the form to handle the submission and then use the authenticateUser mutation.
-// Updated the text fields to update the state when their values change.
-// Displayed an error message if the authenticateUser mutation throws an error.
-// Displayed a loading indicator on the button during the authentication process.
+'use client'
+import { gql } from '@apollo/client';
+import { useMutation } from '@apollo/client/react';
 
-
-import Link from 'next/link';
-import useAuthenticateUser from '@/hooks/useAuthenticateUser';
-import { Button } from '@/components/Button';
-import { TextField } from '@/components/Fields';
-import { Logo } from '@/components/Logo';
-import { SlimLayout } from '@/components/SlimLayout';
-import { type Metadata } from 'next';
 import { useState } from 'react';
-import router from 'next/router';
 
+export const LOGIN_USER = gql`
+  mutation LoginUser($username: String!, $password: String!) {
+    loginuser(username: $username, password: $password) {
+      status
+      message
+      success
+      user {
+        realmaccess {
+          isPrimary
+          realm {
+            name
+          }
+          realmAccount {
+            id
+            firstName
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default function Login() {
-  const { authenticateUser, loading, error, data } = useAuthenticateUser();
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [loginUser, { loading, error, data }] = useMutation(LOGIN_USER);
+  // const router = useRouter();
+  const [realmId, setRealmId] = useState<string | null>(null)
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+
+  const handleLogin = async (e: { preventDefault: () => void; target: { email: { value: any; }; password: { value: any; }; }; }) => {
     e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    
     try {
-      await authenticateUser({
-        variables: {
-          username: credentials.email,
-          password: credentials.password,
-        },
+      const { data } = await loginUser({
+        variables: { username: email, password: password }
       });
-      // Redirect or do some action after successful authentication if needed
-      // Redirect to dashboard
-      router.push('/[realmID]dashboard'); 
+  
+      if (data.loginuser.success) {
+        console.log("Login success:", data.loginuser.user);
+  
+        // Find the primary realm from the realmaccess array
+        const primaryRealm = data.loginuser.user.realmaccess.find((access: any) => access.isPrimary);
+      
+        // If a primary realm is found, extract the id from the realm
+        if (primaryRealm) {
+          const realmId = primaryRealm.realmAccount.id;
+          console.log("Primary realm found:", realmId);
+         
+
+          // Redirect to a path using the extracted realmId. Modify the path as per your requirement.
+          window.location.href = `/dashboard/${realmId}/`;
+
+        } else {
+          console.error("No primary realm found");
+
+        }
+  
+      } else {
+        // Handle error message - data.loginuser.message
+      }
     } catch (err) {
-      // Handle the error if needed
+      console.error("Login error:", err);
     }
   };
 
   return (
-    <SlimLayout>
-      <div className="flex">
-        <Link href="/" aria-label="Home">
-          <Logo className="h-10 w-auto" />
-        </Link>
-      </div>
-      <h2 className="mt-20 text-lg font-semibold text-gray-900">
-        Sign in to your account
-      </h2>
-      <p className="mt-2 text-sm text-gray-700">
-        Don’t have an account?{' '}
-        <Link
-          href="/register"
-          className="font-medium text-green-600 hover:underline"
-        >
-          Sign up
-        </Link>{' '}
-        for a free trial.
-      </p>
-      <form onSubmit={handleSubmit} className="mt-10 grid grid-cols-1 gap-y-8">
-        <TextField
-          label="Email address"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          onChange={e => setCredentials(prev => ({ ...prev, email: e.target.value }))}
-        />
-        <TextField
-          label="Password"
-          name="password"
-          type="password"
-          autoComplete="current-password"
-          required
-          onChange={e => setCredentials(prev => ({ ...prev, password: e.target.value }))}
-        />
-        <div>
-          <Button type="submit" variant="solid" color="green" className="w-full" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign in'}
-          </Button>
+    <>
+    
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            className="mx-auto h-10 w-auto"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+            alt="Your Company"
+          />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
+            Sign in to your account
+          </h2>
         </div>
-        {error && <p className="text-red-500 mt-2">{error.message}</p>}
-      </form>
-    </SlimLayout>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className="space-y-6" onSubmit={handleLogin}>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-white">
+                Email address
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-white">
+                  Password
+                </label>
+                <div className="text-sm">
+                  <a href="#" className="font-semibold text-indigo-400 hover:text-indigo-300">
+                    Forgot password?
+                  </a>
+                </div>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
+
+          <p className="mt-10 text-center text-sm text-gray-400">
+            Not a member?{' '}
+            <a href="#" className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300">
+              Start a 14 day free trial
+            </a>
+          </p>
+        </div>
+      </div>
+    </>
   )
 }

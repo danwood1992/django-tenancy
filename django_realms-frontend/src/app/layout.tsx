@@ -41,7 +41,7 @@ export default function RootLayout({
         lexend.variable,
       )}
     >
-      <body className="flex h-full flex-col"><ApolloWrapper>{children}</ApolloWrapper></body>
+      <body className="flex h-full flex-col bg-slate-800"><ApolloWrapper>{children}</ApolloWrapper></body>
     </html>
   )
 }
